@@ -9,13 +9,16 @@ void main() {
   querySelector('#midi-notes').text = '$notes';
   querySelector('#chord').text = chord.name;
   querySelector('#scales').text = '${Scale.match(chord.notes)}';
-  querySelector('#midi').text = '${WebMidi.enabled}';
 
-  WebMidi.enable(() {
-    querySelector('#midi').text = '${WebMidi.enabled}';
-    querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-    querySelector('#midi-outputs').text = '${WebMidi.outputs.map((Output output) => output.name)}';
+  querySelector('#enable-midi-button').onClick.listen((_) {
+    querySelector('#enable-midi-button').style.display = "none";
+    WebMidi.enable(() {
+      querySelector('#midi-enabled').text = '${WebMidi.enabled}';
+      querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
+    });
   });
+
+
 
 }
 

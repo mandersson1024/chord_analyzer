@@ -8,3 +8,17 @@ html, body {
   font-family: 'Roboto', sans-serif;
 }
 
+#enable-midi-button {
+  width: 162px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  background: white;
+  outline: none;
+  transition: 0.15s;
+}
+
+#enable-midi-button:hover {
+  background: cornflowerblue;
+}
