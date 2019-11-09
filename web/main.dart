@@ -18,7 +18,14 @@ void main() {
     });
   });
 
-
-
+  for (int note = 48; note <= 83; ++note) {
+    DivElement elt = querySelector("#key-$note");
+    elt.onClick.listen((_) {
+      elt.classes.toggle("key-selected");
+      // todo:
+      // todo: keyboard.toggleNote(note);
+      // todo: elt.classes.toggle("key-selected", keyboard.getNote(note));
+    });
+  }
 }
 

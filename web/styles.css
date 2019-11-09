@@ -22,3 +22,44 @@ html, body {
 #enable-midi-button:hover {
   background: cornflowerblue;
 }
+
+#keyboard {
+  position: relative;
+}
+
+.white-key {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 200px;
+  background: white;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.white-key:hover {
+  background: cornflowerblue;
+}
+
+.black-key {
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 120px;
+  background: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.black-key:hover {
+  background: cornflowerblue;
+}
+
+.key-selected {
+  background: greenyellow;
+}
+
+.key-selected:hover {
+  background: yellow;
+}
