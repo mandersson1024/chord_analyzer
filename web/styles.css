@@ -1,11 +1,21 @@
+/*
 @import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Nothing+You+Could+Do);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+*/
+@import url(https://fonts.googleapis.com/css?family=Caveat);
 
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+  /*
   font-family: 'Roboto', sans-serif;
+  font-family: 'Nothing You Could Do', sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  */
+  font-family: 'Caveat', sans-serif;
 }
 
 #enable-midi-button {
@@ -23,8 +33,17 @@ html, body {
   background: cornflowerblue;
 }
 
+#chord {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  font-size: 180px;
+}
+
 #keyboard {
   position: relative;
+  margin: 0 auto;
+  width: calc(21*40px); /* 21 white keys */
 }
 
 .white-key {
