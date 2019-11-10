@@ -11,14 +11,29 @@ void _hideMidiButtons() {
   querySelector('#no-midi-button').style.display = "none";
 }
 
-void main() {
-  querySelector('#enable-midi-button').onClick.listen((_) {
-    _hideMidiButtons();
-    WebMidi.enable(() {
+void _enableMidi() {
+  WebMidi.enable((var error) {
+    if (error != null) {
+      window.console.warn("No MIDI");
+    } else {
       querySelector('#midi-enabled').text = '${WebMidi.enabled}';
       querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-    });
+    }
   });
+}
+
+bool get debug => true;
+
+void main() {
+  if (debug) {
+    _hideMidiButtons();
+    _enableMidi();
+  } else {
+    querySelector('#enable-midi-button').onClick.listen((_) {
+      _hideMidiButtons();
+      _enableMidi();
+    });
+  }
 
   querySelector('#no-midi-button').onClick.listen((_) {
     _hideMidiButtons();
@@ -27,7 +42,6 @@ void main() {
   for (int note = 48; note <= 83; ++note) {
     DivElement elt = querySelector("#key-$note");
     elt.onClick.listen((_) {
-      //elt.classes.toggle("key-selected");
       state.toggleNote(note);
       elt.classes.toggle("key-selected", state.getNote(note));refreshChordDisplay();
     });

@@ -16,6 +16,8 @@ html, body {
   font-family: 'Quicksand', sans-serif;
   */
   font-family: 'Caveat', sans-serif;
+
+  background: radial-gradient(whitesmoke 65%, black 275%);
 }
 
 .midi-button {
