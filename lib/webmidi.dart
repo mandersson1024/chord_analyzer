@@ -14,6 +14,8 @@ class WebMidi {
 @JS()
 class Input {
   String name;
+  external Input addListener(String type, var channel, Function listener);
+  external Input removeListener([String type, var channel, Function listener]);
 }
 
 @JS()

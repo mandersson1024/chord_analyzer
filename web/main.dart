@@ -3,8 +3,10 @@ import 'package:music_theory/webmidi.dart';
 import 'package:music_theory/chords.dart';
 import 'package:music_theory/scales.dart';
 import 'package:music_theory/app_state.dart';
+import 'package:music_theory/midi_input.dart';
 
 AppState state = AppState();
+MidiInput midiInput;
 
 void _hideMidiButtons() {
   querySelector('#enable-midi-button').style.display = "none";
@@ -18,6 +20,7 @@ void _enableMidi() {
     } else {
       querySelector('#midi-enabled').text = '${WebMidi.enabled}';
       querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
+      midiInput = MidiInput.setup();
     }
   });
 }
