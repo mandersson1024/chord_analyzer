@@ -1,6 +1,8 @@
 @JS()
 library temp_web_midi;
 
+import 'dart:typed_data';
+
 import "package:js/js.dart";
 
 @JS()
@@ -21,4 +23,12 @@ class Input {
 @JS()
 class Output {
   String name;
+}
+
+@JS()
+class MidiInputEvent {
+  Input target;
+  Uint8List data;
+  num timestamp;
+  String type;
 }

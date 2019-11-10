@@ -10,11 +10,11 @@ class MidiInput {
     }
   }
 
-  void _onNoteOn(e) {
-    print("Received 'noteon' message");
+  void _onNoteOn(MidiInputEvent event) {
+    print("Received '${event.type}' message from ${event.target.name} at ${event.timestamp} with data ${event.data}");
   }
 
-  void _onNoteOff(e) {
-    print("Received 'noteoff' message");
+  void _onNoteOff(MidiInputEvent event) {
+    print("Received '${event.type}' message from ${event.target.name} at ${event.timestamp} with data ${event.data}");
   }
 }
