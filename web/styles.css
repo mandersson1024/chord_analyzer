@@ -18,26 +18,51 @@ html, body {
   font-family: 'Caveat', sans-serif;
 }
 
-#enable-midi-button {
-  width: 162px;
-  height: 100px;
-  border: 1px solid black;
-  border-radius: 10px;
+.midi-button {
+  position: fixed;
+  display: block;
   text-align: center;
-  background: white;
-  outline: none;
-  transition: 0.15s;
+  margin: 0 auto;
+  color: black;
+  transition: 0.1s;
+  font-family: 'Caveat', sans-serif;
+  white-space: nowrap;
+  border: none;
 }
 
-#enable-midi-button:hover {
-  background: cornflowerblue;
+.midi-button:hover {
+  color: magenta;
+  transition: 0.1s;
+}
+
+#enable-midi-button {
+  width: 100vw;
+  height: 100vh;
+  font-size: 100px;
+  line-height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 10;
+}
+
+#no-midi-button {
+  top: 66vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 25px;
+  background: transparent;
+  z-index: 11;
 }
 
 #chord {
   position: relative;
   width: 100%;
   text-align: center;
+  height: 180px;
   font-size: 180px;
+  line-height: 180px;
 }
 
 #keyboard {

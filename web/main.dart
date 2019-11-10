@@ -9,6 +9,7 @@ AppState state = AppState();
 void main() {
   querySelector('#enable-midi-button').onClick.listen((_) {
     querySelector('#enable-midi-button').style.display = "none";
+    querySelector('#no-midi-button').style.display = "none";
     WebMidi.enable(() {
       querySelector('#midi-enabled').text = '${WebMidi.enabled}';
       querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';

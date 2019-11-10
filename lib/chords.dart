@@ -11,7 +11,9 @@ class Chord {
   }
 
   String get name {
-    if (root == null) {
+    if (notes.isEmpty) {
+      return "";
+    } else if (root == null) {
       return "n.c.";
     } else {
       return NoteNames.toText(root);
