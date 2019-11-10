@@ -28,7 +28,7 @@ void _enableMidi() {
 void _onMidiInput(int note, bool on) {
   state.setNote(note, on);
   _refreshVisualKeyboardNote(note);
-  refreshChordDisplay();
+  _refreshChordDisplay();
 }
 
 void _refreshVisualKeyboardNote(int note) {
@@ -57,17 +57,16 @@ void main() {
     elt.onClick.listen((_) {
       state.toggleNote(note);
       _refreshVisualKeyboardNote(note);
-      refreshChordDisplay();
+      _refreshChordDisplay();
     });
   }
 
-  refreshChordDisplay();
+  _refreshChordDisplay();
 }
 
-void refreshChordDisplay() {
-  List<int> notes = state.noteList;
-  Chord chord = Chord.fromMidiNoteNumbers(notes);
-  querySelector('#midi-notes').text = '$notes';
-  querySelector('#chord').text = chord.name;
-  querySelector('#scales').text = '${Scale.match(chord.notes)}';
+void _refreshChordDisplay() {
+  querySelector('#midi-notes').text = state.notes.toString();
+  List<String> chords = Chords.analyse(state.notes);
+  querySelector('#chord').text = chords.isEmpty ? "" : chords.first;
+  //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }

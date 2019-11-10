@@ -12,7 +12,7 @@ class Scale {
     return name;
   }
 
-  static List<Scale> match(List<int> notes) {
+  static List<Scale> match(Set<int> notes) {
     return [];
   }
 }
