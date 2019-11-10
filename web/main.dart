@@ -6,14 +6,22 @@ import 'package:music_theory/app_state.dart';
 
 AppState state = AppState();
 
+void _hideMidiButtons() {
+  querySelector('#enable-midi-button').style.display = "none";
+  querySelector('#no-midi-button').style.display = "none";
+}
+
 void main() {
   querySelector('#enable-midi-button').onClick.listen((_) {
-    querySelector('#enable-midi-button').style.display = "none";
-    querySelector('#no-midi-button').style.display = "none";
+    _hideMidiButtons();
     WebMidi.enable(() {
       querySelector('#midi-enabled').text = '${WebMidi.enabled}';
       querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
     });
+  });
+
+  querySelector('#no-midi-button').onClick.listen((_) {
+    _hideMidiButtons();
   });
 
   for (int note = 48; note <= 83; ++note) {
