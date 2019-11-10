@@ -3,6 +3,14 @@ class AppState {
 
   List<int> get noteList => _notes.toList();
 
+  void setNote(int note, bool on) {
+    if (on) {
+      _notes.add(note);
+    } else {
+      _notes.remove(note);
+    }
+  }
+
   void toggleNote(int note) {
     if (_notes.contains(note)) {
       _notes.remove(note);

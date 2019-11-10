@@ -20,10 +20,20 @@ void _enableMidi() {
     } else {
       querySelector('#midi-enabled').text = '${WebMidi.enabled}';
       querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-      midiInput = MidiInput.setup();
+      midiInput = MidiInput.setup(_onMidiInput);
     }
   });
 }
+
+void _onMidiInput(int note, bool on) {
+  state.setNote(note, on);
+  _refreshVisualKeyboardNote(note);
+  refreshChordDisplay();
+}
+
+void _refreshVisualKeyboardNote(int note) {
+  querySelector("#key-$note").classes.toggle("key-selected", state.getNote(note));
+} 
 
 bool get debug => true;
 
@@ -46,7 +56,8 @@ void main() {
     DivElement elt = querySelector("#key-$note");
     elt.onClick.listen((_) {
       state.toggleNote(note);
-      elt.classes.toggle("key-selected", state.getNote(note));refreshChordDisplay();
+      _refreshVisualKeyboardNote(note);
+      refreshChordDisplay();
     });
   }
 

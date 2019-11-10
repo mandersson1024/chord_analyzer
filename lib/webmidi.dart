@@ -2,7 +2,6 @@
 library temp_web_midi;
 
 import 'dart:typed_data';
-
 import "package:js/js.dart";
 
 @JS()
