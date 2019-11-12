@@ -68,6 +68,16 @@ html, body {
   line-height: 180px;
 }
 
+#alternative-chords {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  height: 45px;
+  font-size: 45px;
+  line-height: 45px;
+  color: grey;
+}
+
 #keyboard {
   position: relative;
   margin: 0 auto;

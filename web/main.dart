@@ -68,5 +68,6 @@ void _refreshChordDisplay() {
   querySelector('#midi-notes').text = state.notes.toString();
   List<String> chords = Chords.analyse(state.notes);
   querySelector('#chord').text = chords.isEmpty ? "" : chords.first;
+  querySelector('#alternative-chords').text = chords.toString();
   //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }
