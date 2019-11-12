@@ -5,12 +5,14 @@ import "package:music_theory/note_names.dart";
 class Chords {
 
   static String match(List<int> normalizedNotes) {
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7])) return "";
+    if (ListEquality().equals(normalizedNotes, [0, 2, 7])) return "sus2";
     if (ListEquality().equals(normalizedNotes, [0, 3, 7])) return "m";
+    if (ListEquality().equals(normalizedNotes, [0, 4, 7])) return "";
+    if (ListEquality().equals(normalizedNotes, [0, 5, 7])) return "sus4";
     return null;
   }
 
-  static String getName(int root, List<int> normalizedNotes) {
+  static String getBasicName(int root, List<int> normalizedNotes) {
     String matchResult = match(normalizedNotes);
     if (matchResult == null) {
       return null;
@@ -22,9 +24,16 @@ class Chords {
   static List<String> analyse(Set<int> notes) {
     List<String> names = [];
 
-    for (int root in notes) {
+    List<int> noteList = List.from(notes);
+
+    // If the chord is ambiguous, then we want to have the lowest note
+    // as the main alternative of being the root. We get this by sorting
+    // the notes.
+    noteList.sort();
+
+    for (int root in noteList) {
       List<int> normalized = normalize(root, notes);
-      String name = getName(root, normalized);
+      String name = getBasicName(root, normalized);
       if (name != null) {
         names.add(name);
       }
