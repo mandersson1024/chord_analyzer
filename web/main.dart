@@ -47,10 +47,23 @@ void main() {
   _refreshChordDisplay();
 }
 
+List<String> _alternateNotations(List<String> chords) {
+  if (chords.isEmpty) {
+    return [];
+  } else {
+    return chords.sublist(1);
+  }
+}
+
+String _formatChordList(List<String> chords) {
+  var s = chords.toString();
+  return s.substring(1, s.length-1);
+}
+
 void _refreshChordDisplay() {
   querySelector('#midi-notes').text = state.notes.toString();
   List<String> chords = Chords.analyse(state.notes);
   (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : chords.first;
-  (querySelector('#alternative-chords') as HtmlElement).innerHtml = chords.toString();
+  (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternateNotations(chords));
   //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }
