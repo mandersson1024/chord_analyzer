@@ -20,13 +20,20 @@ html, body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
+sup {
+  font-size: 65%;
+  vertical-align: super;
+  line-height: 0;
+}
+
 #chord {
-  position: relative;
+  /*position: relative;*/
   width: 100%;
   text-align: center;
   font-size: 180px;
-  height: 200px;
-  line-height: 200px;
+  height: 150px;
+  padding-top: 50px;
+  /*line-height: 200px;*/
 }
 
 #alternative-chords {
