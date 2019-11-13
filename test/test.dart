@@ -51,6 +51,8 @@ void _chordsTest() {
   test("", () => expect(Chords.getBasicName(60, [0, 3, 7]), equals("Cm")));
   test("", () => expect(Chords.getBasicName(60, [0, 4, 7]), equals("C")));
   test("", () => expect(Chords.getBasicName(60, [0, 5, 7]), equals("Csus4")));
+  test("", () => expect(Chords.getBasicName(60, [0, 3, 7, 10]), equals("Cm<sup>7</sup>")));
+  test("", () => expect(Chords.getBasicName(60, [0, 4, 7, 10]), equals("C<sup>7</sup>")));
 
   test("", () => expect(Chords.analyse({60, 62, 67}), equals(["Csus2", "Gsus4"])));
   test("", () => expect(Chords.analyse({60, 63, 67}), equals(["Cm"])));

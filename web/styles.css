@@ -63,18 +63,19 @@ html, body {
   position: relative;
   width: 100%;
   text-align: center;
-  height: 180px;
   font-size: 180px;
-  line-height: 180px;
+  height: 200px;
+  line-height: 200px;
 }
 
 #alternative-chords {
   position: relative;
   width: 100%;
   text-align: center;
-  height: 45px;
+  padding-top: 40px;
   font-size: 45px;
-  line-height: 45px;
+  height: 70px;
+  line-height: 70px;
   color: grey;
 }
 
