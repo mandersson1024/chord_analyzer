@@ -57,6 +57,8 @@ void _chordsTest() {
   test("", () => expect(Chords.analyse({60, 62, 67}), equals(["Csus2", "Gsus4"])));
   test("", () => expect(Chords.analyse({60, 63, 67}), equals(["Cm"])));
   test("", () => expect(Chords.analyse({60, 64, 67}), equals(["C"])));
+  test("", () => expect(Chords.analyse({60, 64, 67, 69}), equals(["C<sup>6</sup>", "Am<sup>7</sup>"])));
+  test("", () => expect(Chords.analyse({60, 63, 67, 69}), equals(["Cm<sup>6</sup>"])));
   test("", () => expect(Chords.analyse({60, 65, 67}), equals(["Csus4", "Fsus2"])));
 }
 

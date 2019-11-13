@@ -9,6 +9,8 @@ class Chords {
     if (ListEquality().equals(normalizedNotes, [0, 3, 7])) return "m";
     if (ListEquality().equals(normalizedNotes, [0, 4, 7])) return "";
     if (ListEquality().equals(normalizedNotes, [0, 5, 7])) return "sus4";
+    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 9])) return "m<sup>6</sup>";
+    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 9])) return "<sup>6</sup>";
     if (ListEquality().equals(normalizedNotes, [0, 3, 7, 10])) return "m<sup>7</sup>";
     if (ListEquality().equals(normalizedNotes, [0, 4, 7, 10])) return "<sup>7</sup>";
     return null;
