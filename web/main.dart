@@ -8,10 +8,7 @@ import 'package:music_theory/midi_input.dart';
 AppState state = AppState();
 MidiInput midiInput;
 
-void _hideMidiButtons() {
-  querySelector('#enable-midi-button').style.display = "none";
-  querySelector('#no-midi-button').style.display = "none";
-}
+bool get debug => true;
 
 void _enableMidi() {
   WebMidi.enable((var error) {
@@ -35,22 +32,8 @@ void _refreshVisualKeyboardNote(int note) {
   querySelector("#key-$note").classes.toggle("key-selected", state.getNote(note));
 } 
 
-bool get debug => true;
-
 void main() {
-  if (debug) {
-    _hideMidiButtons();
-    _enableMidi();
-  } else {
-    querySelector('#enable-midi-button').onClick.listen((_) {
-      _hideMidiButtons();
-      _enableMidi();
-    });
-  }
-
-  querySelector('#no-midi-button').onClick.listen((_) {
-    _hideMidiButtons();
-  });
+  _enableMidi();
 
   for (int note = 48; note <= 83; ++note) {
     DivElement elt = querySelector("#key-$note");

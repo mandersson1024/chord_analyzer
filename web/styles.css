@@ -20,45 +20,6 @@ html, body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-.midi-button {
-  position: fixed;
-  display: block;
-  text-align: center;
-  margin: 0 auto;
-  color: black;
-  transition: 0.1s;
-  /*font-family: 'Caveat', sans-serif;*/
-  white-space: nowrap;
-  border: none;
-  outline: none;
-}
-
-.midi-button:hover {
-  color: magenta;
-  transition: 0.1s;
-}
-
-#enable-midi-button {
-  width: 100vw;
-  height: 100vh;
-  font-size: 100px;
-  padding-bottom: 66vh;
-  background: rgba(255, 255, 255, 0.95);
-  z-index: 10;
-}
-
-#no-midi-button {
-  top: 28vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 220px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 25px;
-  background: transparent;
-  z-index: 11;
-}
-
 #chord {
   position: relative;
   width: 100%;
