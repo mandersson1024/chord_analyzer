@@ -1,4 +1,4 @@
-import 'package:music_theory/webmidi.dart';
+import 'package:music_theory/webmidi_js.dart';
 
 typedef MidiCallback = void Function(int note, bool on);
 

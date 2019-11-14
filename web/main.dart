@@ -1,5 +1,6 @@
 import 'dart:html';
-import 'package:music_theory/webmidi.dart';
+import 'package:music_theory/webmidi_js.dart';
+import 'package:music_theory/tone_js.dart';
 import 'package:music_theory/chords.dart';
 import 'package:music_theory/scales.dart';
 import 'package:music_theory/app_state.dart';
@@ -32,12 +33,18 @@ void _refreshVisualKeyboardNote(int note) {
   querySelector("#key-$note").classes.toggle("key-selected", state.getNote(note));
 } 
 
+AudioNode _synth;
+
 void main() {
   _enableMidi();
 
   for (int note = 48; note <= 83; ++note) {
     DivElement elt = querySelector("#key-$note");
     elt.onClick.listen((_) {
+      if (_synth == null) {
+        _synth = Synth().toMaster();
+      }
+      _synth.triggerAttackRelease('C4', '8n');
       state.toggleNote(note);
       _refreshVisualKeyboardNote(note);
       _refreshChordDisplay();
