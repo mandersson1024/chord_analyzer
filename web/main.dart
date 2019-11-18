@@ -5,6 +5,7 @@ import 'package:music_theory/chords.dart';
 import 'package:music_theory/scales.dart';
 import 'package:music_theory/app_state.dart';
 import 'package:music_theory/midi_input.dart';
+import 'package:music_theory/keyboard_view.dart';
 
 AppState state = AppState();
 MidiInput midiInput;
@@ -36,6 +37,14 @@ void _refreshVisualKeyboardNote(int note) {
 AudioNode _synth;
 
 void main() {
+  DivElement keyboard = KeyboardView.build()
+    ..style.position = "absolute"
+    ..style.top = "100px"
+    ..style.left = "100px"
+  ;
+
+  document.body.children.add(keyboard);
+
   _enableMidi();
 
   for (int note = 48; note <= 83; ++note) {
