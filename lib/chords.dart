@@ -2,26 +2,48 @@
 import "package:collection/collection.dart";
 import "package:music_theory/note_names.dart";
 
+class ChordType {
+  static final ChordType major = ChordType("", "");
+  static final ChordType m = ChordType("m", "-");
+  static final ChordType sus2 = ChordType.same("sus2");
+  static final ChordType sus4 = ChordType.same("sus4");
+  static final ChordType sixth = ChordType.same("<sup>6</sup>");
+  static final ChordType m6 = ChordType.same("m<sup>6</sup>");
+  static final ChordType seventh = ChordType.same("<sup>7</sup>");
+  static final ChordType m7 = ChordType.same("m<sup>7</sup>");
+
+  String rockName;
+  String jazzName;
+
+  ChordType(this.rockName, this.jazzName);
+
+  ChordType.same(String name) {
+    rockName = name;
+    jazzName = name;
+  }
+}
+
+
 class Chords {
 
-  static String match(List<int> normalizedNotes) {
-    if (ListEquality().equals(normalizedNotes, [0, 2, 7])) return "sus2";
-    if (ListEquality().equals(normalizedNotes, [0, 3, 7])) return "m";
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7])) return "";
-    if (ListEquality().equals(normalizedNotes, [0, 5, 7])) return "sus4";
-    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 9])) return "m<sup>6</sup>";
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 9])) return "<sup>6</sup>";
-    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 10])) return "m<sup>7</sup>";
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 10])) return "<sup>7</sup>";
+  static ChordType match(List<int> normalizedNotes) {
+    if (ListEquality().equals(normalizedNotes, [0, 2, 7])) return ChordType.sus2;
+    if (ListEquality().equals(normalizedNotes, [0, 3, 7])) return ChordType.m;
+    if (ListEquality().equals(normalizedNotes, [0, 4, 7])) return ChordType.major;
+    if (ListEquality().equals(normalizedNotes, [0, 5, 7])) return ChordType.sus4;
+    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 9])) return ChordType.m6;
+    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 9])) return ChordType.sixth;
+    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 10])) return ChordType.m7;
+    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 10])) return ChordType.seventh;
     return null;
   }
 
   static String getBasicName(int root, List<int> notes) {
-    String matchResult = match(notes);
+    ChordType matchResult = match(notes);
     if (matchResult == null) {
       return "";
     } else {
-      return NoteNames.name(root) + matchResult;
+      return NoteNames.name(root) + matchResult.rockName;
     }
   }
 
