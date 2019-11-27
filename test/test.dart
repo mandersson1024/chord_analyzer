@@ -46,15 +46,15 @@ void _chordsTest() {
   test("", () => expect(Chords.normalize(0, {0, 2}), equals([0, 2])));
   test("", () => expect(Chords.normalize(2, {0, 2}), equals([0, 10])));
 
-  test("", () => expect(Chords.getBasicName(60, []), ""));
-  test("", () => expect(Chords.getBasicName(60, [0]), ""));
-  test("", () => expect(Chords.getBasicName(60, [0, 4]), ""));
-  test("", () => expect(Chords.getBasicName(60, [0, 2, 7]), equals("Csus2")));
-  test("", () => expect(Chords.getBasicName(60, [0, 3, 7]), equals("Cm")));
-  test("", () => expect(Chords.getBasicName(60, [0, 4, 7]), equals("C")));
-  test("", () => expect(Chords.getBasicName(60, [0, 5, 7]), equals("Csus4")));
-  test("", () => expect(Chords.getBasicName(60, [0, 3, 7, 10]), equals("Cm<sup>7</sup>")));
-  test("", () => expect(Chords.getBasicName(60, [0, 4, 7, 10]), equals("C<sup>7</sup>")));
+  test("", () => expect(Chords.getChord(60, []).type, null));
+  test("", () => expect(Chords.getChord(60, [0]).type, null));
+  test("", () => expect(Chords.getChord(60, [0, 4]).type, null));
+  test("", () => expect(Chords.getChord(60, [0, 2, 7]).type, ChordType.sus2));
+  test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.m));
+  test("", () => expect(Chords.getChord(60, [0, 4, 7]).type, ChordType.major));
+  test("", () => expect(Chords.getChord(60, [0, 5, 7]).type, ChordType.sus4));
+  test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
+  test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.seventh));
 
   test("duplicates of notes", () => expect(Chords.analyse({60, 60, 64, 67}), equals(["C"])));
   test("same note in octaves", () => expect(Chords.analyse({60, 64, 67, 72}), equals(["C"])));

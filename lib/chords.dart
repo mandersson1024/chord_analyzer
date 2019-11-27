@@ -23,6 +23,21 @@ class ChordType {
   }
 }
 
+class Chord {
+  int root;
+  ChordType type;
+
+  Chord(this.root, this.type);
+
+  String getName() {
+    if (type == null) {
+      return "";
+    } else {
+      return NoteNames.name(root) + type.rockName;
+    }
+  }
+}
+
 
 class Chords {
 
@@ -38,13 +53,9 @@ class Chords {
     return null;
   }
 
-  static String getBasicName(int root, List<int> notes) {
-    ChordType matchResult = match(notes);
-    if (matchResult == null) {
-      return "";
-    } else {
-      return NoteNames.name(root) + matchResult.rockName;
-    }
+  static Chord getChord(int root, List<int> notes) {
+    ChordType type = match(notes);
+    return Chord(root, type);
   }
 
   static List<String> analyse(Set<int> notes) {
