@@ -24,17 +24,27 @@ class ChordType {
 }
 
 class Chord {
-  int root;
+  String noteName;
   ChordType type;
 
-  Chord(this.root, this.type);
+  Chord(this.noteName, this.type);
 
-  String getName() {
+  String toString() {
     if (type == null) {
-      return "";
+      return "n.c.";
     } else {
-      return NoteNames.name(root) + type.rockName;
+      return noteName + type.rockName;
     }
+  }
+
+  bool get isNoChord => type == null;
+
+  bool operator==(dynamic other) {
+    if (other == null) return false;
+    if (!(other is Chord)) return false;
+    if ((other as Chord).noteName != noteName) return false;
+    if ((other as Chord).type != type) return false;
+    return true;
   }
 }
 
@@ -54,12 +64,13 @@ class Chords {
   }
 
   static Chord getChord(int root, List<int> notes) {
+    String noteName = NoteNames.name(root);
     ChordType type = match(notes);
-    return Chord(root, type);
+    return Chord(noteName, type);
   }
 
-  static List<String> analyse(Set<int> notes) {
-    List<String> names = [];
+  static List<Chord> analyze(Set<int> notes) {
+    List<Chord> chords = [];
 
     List<int> noteList = List.from(notes);
 
@@ -70,17 +81,13 @@ class Chords {
 
     for (int root in noteList) {
       List<int> normalized = normalize(root, notes);
-      String name = getBasicName(root, normalized);
-      if (name != "" && !names.contains(name)) {
-        names.add(name);
+      Chord chord = getChord(root, normalized);
+      if (!chord.isNoChord) {
+        chords.add(chord);
       }
     }
 
-    if (names.isEmpty && notes.length > 2) {
-      names = ["n.c."];
-    }
-
-    return names;
+    return chords;
   }
 
   static List<int> normalize(int root, Set<int> notes) {

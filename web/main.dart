@@ -43,7 +43,7 @@ void main() {
     ..style.left = "100px"
   ;
 
-  document.body.children.add(keyboard);
+  //document.body.children.add(keyboard);
 
   _enableMidi();
 
@@ -63,7 +63,7 @@ void main() {
   _refreshChordDisplay();
 }
 
-List<String> _alternateNotations(List<String> chords) {
+List<Chord> _alternativeChords(List<Chord> chords) {
   if (chords.isEmpty) {
     return [];
   } else {
@@ -71,15 +71,15 @@ List<String> _alternateNotations(List<String> chords) {
   }
 }
 
-String _formatChordList(List<String> chords) {
+String _formatChordList(List<Chord> chords) {
   var s = chords.toString();
   return s.substring(1, s.length-1);
 }
 
 void _refreshChordDisplay() {
   querySelector('#midi-notes').text = state.notes.toString();
-  List<String> chords = Chords.analyse(state.notes);
-  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : chords.first;
-  (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternateNotations(chords));
+  List<Chord> chords = Chords.analyze(state.notes);
+  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : chords.first.toString();
+  (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
   //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }

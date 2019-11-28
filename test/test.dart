@@ -56,15 +56,15 @@ void _chordsTest() {
   test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
   test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.seventh));
 
-  test("duplicates of notes", () => expect(Chords.analyse({60, 60, 64, 67}), equals(["C"])));
-  test("same note in octaves", () => expect(Chords.analyse({60, 64, 67, 72}), equals(["C"])));
+  test("duplicates of notes", () => expect(Chords.analyze({60, 60, 64, 67}), equals([Chord("C", ChordType.major)])));
+  test("same note in octaves", () => expect(Chords.analyze({60, 64, 67, 72}), equals([Chord("C", ChordType.major)])));
 
-  test("", () => expect(Chords.analyse({60, 62, 67}), equals(["Csus2", "Gsus4"])));
-  test("", () => expect(Chords.analyse({60, 63, 67}), equals(["Cm"])));
-  test("", () => expect(Chords.analyse({60, 64, 67}), equals(["C"])));
-  test("", () => expect(Chords.analyse({60, 64, 67, 69}), equals(["C<sup>6</sup>", "Am<sup>7</sup>"])));
-  test("", () => expect(Chords.analyse({60, 63, 67, 69}), equals(["Cm<sup>6</sup>"])));
-  test("", () => expect(Chords.analyse({60, 65, 67}), equals(["Csus4", "Fsus2"])));
+  test("", () => expect(Chords.analyze({60, 62, 67}), equals(["Csus2", "Gsus4"])));
+  test("", () => expect(Chords.analyze({60, 63, 67}), equals(["Cm"])));
+  test("", () => expect(Chords.analyze({60, 64, 67}), equals(["C"])));
+  test("", () => expect(Chords.analyze({60, 64, 67, 69}), equals(["C<sup>6</sup>", "Am<sup>7</sup>"])));
+  test("", () => expect(Chords.analyze({60, 63, 67, 69}), equals(["Cm<sup>6</sup>"])));
+  test("", () => expect(Chords.analyze({60, 65, 67}), equals(["Csus4", "Fsus2"])));
 }
 
 void _scalesTest() {
