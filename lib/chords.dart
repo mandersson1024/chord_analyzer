@@ -83,7 +83,9 @@ class Chords {
       List<int> normalized = normalize(root, notes);
       Chord chord = getChord(root, normalized);
       if (!chord.isNoChord) {
-        chords.add(chord);
+        if (!chords.contains(chord)) {
+          chords.add(chord);
+        }
       }
     }
 
