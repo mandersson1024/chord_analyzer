@@ -10,7 +10,7 @@ void main() {
 
 void _noteNamesTest() {
   test("", () => expect(NoteNames.name(48), equals("C")));
-  test("", () => expect(NoteNames.name(49), equals("C♯")));
+  test("", () => expect(NoteNames.name(49), equals("D♭")));
   test("", () => expect(NoteNames.name(50), equals("D")));
   test("", () => expect(NoteNames.name(51), equals("E♭")));
   test("", () => expect(NoteNames.name(52), equals("E")));
@@ -22,7 +22,7 @@ void _noteNamesTest() {
   test("", () => expect(NoteNames.name(58), equals("B♭")));
   test("", () => expect(NoteNames.name(59), equals("B")));
   test("", () => expect(NoteNames.name(60), equals("C")));
-  test("", () => expect(NoteNames.name(61), equals("C♯")));
+  test("", () => expect(NoteNames.name(61), equals("D♭")));
   test("", () => expect(NoteNames.name(62), equals("D")));
   test("", () => expect(NoteNames.name(63), equals("E♭")));
   test("", () => expect(NoteNames.name(64), equals("E")));
