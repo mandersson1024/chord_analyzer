@@ -49,9 +49,9 @@ void _chordsTest() {
   test("", () => expect(Chords.getChord(60, []).type, null));
   test("", () => expect(Chords.getChord(60, [0]).type, null));
   test("", () => expect(Chords.getChord(60, [0, 4]).type, null));
-  test("", () => expect(Chords.getChord(60, [0, 2, 7]).type, ChordType.sus2));
-  test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.m));
   test("", () => expect(Chords.getChord(60, [0, 4, 7]).type, ChordType.major));
+  test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.m));
+  test("", () => expect(Chords.getChord(60, [0, 2, 7]).type, ChordType.sus2));
   test("", () => expect(Chords.getChord(60, [0, 5, 7]).type, ChordType.sus4));
   test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
   test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.seventh));
