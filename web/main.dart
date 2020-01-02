@@ -6,7 +6,7 @@ import 'package:music_theory/chords.dart';
 import 'package:music_theory/scales.dart';
 import 'package:music_theory/app_state.dart';
 import 'package:music_theory/midi_input.dart';
-import 'package:music_theory/keyboard_view.dart';
+import 'package:music_theory/keyboard/keyboard_view.dart';
 
 AppState state = AppState();
 MidiInput midiInput;
