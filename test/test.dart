@@ -2,12 +2,10 @@ import "package:test/test.dart";
 
 import "package:music_theory/note_names.dart";
 import "package:music_theory/chords.dart";
-import "package:music_theory/scales.dart";
 
 void main() {
   group("note_names", _noteNamesTest);
   group("chords", _chordsTest);
-  group("scales", _scalesTest);
 }
 
 void _noteNamesTest() {
@@ -39,16 +37,9 @@ void _noteNamesTest() {
 }
 
 void _chordsTest() {
-  test("", () => expect(Chords.normalize(0, {}), equals([])));
-  test("", () => expect(Chords.normalize(0, {0}), equals([0])));
-  test("", () => expect(Chords.normalize(0, {12}), equals([0])));
-  test("", () => expect(Chords.normalize(0, {0, 12}), equals([0])));
-  test("", () => expect(Chords.normalize(0, {0, 2}), equals([0, 2])));
-  test("", () => expect(Chords.normalize(2, {0, 2}), equals([0, 10])));
-
-  test("", () => expect(Chords.getChord(60, []).type, null));
-  test("", () => expect(Chords.getChord(60, [0]).type, null));
-  test("", () => expect(Chords.getChord(60, [0, 4]).type, null));
+  test("", () => expect(Chords.getChord(60, []).type, ChordType.undefined));
+  test("", () => expect(Chords.getChord(60, [0]).type, ChordType.undefined));
+  test("", () => expect(Chords.getChord(60, [0, 4]).type, ChordType.undefined));
   test("", () => expect(Chords.getChord(60, [0, 4, 7]).type, ChordType.major));
   test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.m));
   test("", () => expect(Chords.getChord(60, [0, 2, 7]).type, ChordType.sus2));
@@ -65,7 +56,4 @@ void _chordsTest() {
   test("", () => expect(Chords.analyze({60, 64, 67, 69}), equals([Chord("C", ChordType.sixth), Chord("A", ChordType.m7)])));
   test("", () => expect(Chords.analyze({60, 63, 67, 69}), equals([Chord("C", ChordType.m6)])));
   test("", () => expect(Chords.analyze({60, 65, 67}), equals([Chord("C", ChordType.sus4), Chord("F", ChordType.sus2)])));
-}
-
-void _scalesTest() {
 }

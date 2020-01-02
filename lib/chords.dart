@@ -3,6 +3,7 @@ import "package:collection/collection.dart";
 import "package:music_theory/note_names.dart";
 
 class ChordType {
+  static final ChordType undefined = ChordType("", "");
   static final ChordType major = ChordType("", "");
   static final ChordType m = ChordType("m", "-");
   static final ChordType sus2 = ChordType.same("sus2");
@@ -30,14 +31,14 @@ class Chord {
   Chord(this.noteName, this.type);
 
   String toString() {
-    if (type == null) {
+    if (type == ChordType.undefined) {
       return "n.c.";
     } else {
       return noteName + type.rockName;
     }
   }
 
-  bool get isNoChord => type == null;
+  bool get isNoChord => type == ChordType.undefined;
 
   bool operator==(dynamic other) {
     if (other == null) return false;
@@ -60,7 +61,7 @@ class Chords {
     if (ListEquality().equals(normalizedNotes, [0, 4, 7, 9])) return ChordType.sixth;
     if (ListEquality().equals(normalizedNotes, [0, 3, 7, 10])) return ChordType.m7;
     if (ListEquality().equals(normalizedNotes, [0, 4, 7, 10])) return ChordType.seventh;
-    return null;
+    return ChordType.undefined;
   }
 
   static Chord getChord(int root, List<int> notes) {
