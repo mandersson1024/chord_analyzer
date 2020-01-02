@@ -66,7 +66,7 @@ void main() {
 void _playNote(int note) {
   String noteName = NoteNames.name(note, ascii: true);
   int octave = note ~/ 12;
-  _synth.triggerAttackRelease("$noteName$octave", '8n');
+  _synth.triggerAttackRelease("$noteName$octave", '32n');
 }
 
 List<Chord> _alternativeChords(List<Chord> chords) {
@@ -92,6 +92,7 @@ void _refreshChordDisplay() {
 }
 
 String _chordNameToHtml(String chord) {
+  // todo: maybe the HTML formatting needs to know about the ChordType and not just the String representation
   chord = chord.replaceAll("#", "<sup>#<\/sup>");
   chord = chord.replaceAll("b", "<sup>b<\/sup>");
   chord = chord.replaceAll("♯", "<sup>♯<\/sup>");
