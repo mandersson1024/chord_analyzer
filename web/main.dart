@@ -40,11 +40,11 @@ AudioNode _synth;
 void main() {
   DivElement keyboard = KeyboardView.build()
     ..style.position = "absolute"
-    ..style.top = "100px"
-    ..style.left = "100px"
+    ..style.top = "345px"
+    ..style.left = "125px"
   ;
 
-  //document.body.children.add(keyboard);
+  document.body.children.add(keyboard);
 
   _enableMidi();
   _refreshChordDisplay();
