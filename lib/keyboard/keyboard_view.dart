@@ -1,5 +1,7 @@
 import "dart:html";
 
+typedef KeyboardClickCallback = void Function(int note);
+
 class KeyboardView {
 
   static const int _whiteKeyWidth = 40;
@@ -20,8 +22,15 @@ class KeyboardView {
     6 * _whiteKeyWidth,
   ];
 
-  static DivElement build({ HtmlElement parent }) {
-    DivElement container = DivElement();
+  DivElement div;
+  Map<int, DivElement> _keys = {};
+
+  KeyboardView(KeyboardClickCallback clickCallback, { HtmlElement parent }) {
+    div = DivElement();
+
+    if (parent != null) {
+      parent.children.add(div);
+    }
 
     int startNote = 48;
     int numKeys = 36;
@@ -32,31 +41,35 @@ class KeyboardView {
       int normalizedNote = note % 12;
       int octave = note ~/ 12;
 
-      var key = _createKey(note)
+      var key = _createKey(note, parent: div)
         ..style.position = "absolute"
         ..style.left = "${_octaveWidth * octave + _positions[normalizedNote] - startOffset}px"
+        ..onClick.listen((_) => clickCallback(note))
       ;
-      container.children.add(key);
+
+      _keys[note] = key;
     }
+  }
+
+  DivElement _createKey(int midiNote, { HtmlElement parent }) {
+    DivElement div = DivElement()
+      ..classes.toggle(_isBlackKey(midiNote) ? "black-key" : "white-key")
+    ;
 
     if (parent != null) {
-      parent.children.add(container);
+      parent.children.add(div);
     }
 
-    return container;
+    return div;
   }
 
-  static DivElement _createKey(int midiNote) {
-    if (_isBlackKey(midiNote)) {
-      return DivElement()..classes.toggle("black-key");
-    } else {
-      return DivElement()..classes.toggle("white-key");
-    }
-  }
-
-  static bool _isBlackKey(int midiNote) {
+  bool _isBlackKey(int midiNote) {
     int n = midiNote % 12;
     return n == 1 || n == 3 || n == 6 || n == 8 || n == 10;
+  }
+
+  void setKeySelected(int note, bool selected) {
+    _keys[note].classes.toggle("key-selected", selected);
   }
 
 }

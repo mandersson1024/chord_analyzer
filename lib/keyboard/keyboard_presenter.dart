@@ -5,11 +5,11 @@ import '../event_forwarder.dart';
 class KeyboardPresenter {
 
   KeyboardModel _model;
-  EventForwarder<KeyboardNoteSelectionChanged> onKeySelected;
+  EventForwarder<KeyboardNoteSelectionChanged> onKeySelectionChanged;
   EventForwarder<KeyboardPlayNote> onPlayAudio;
 
   KeyboardPresenter(this._model) {
-    onKeySelected = EventForwarder(_model.events);
+    onKeySelectionChanged = EventForwarder(_model.events);
     onPlayAudio = EventForwarder(_model.events);
   }
 

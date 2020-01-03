@@ -10,14 +10,15 @@ import 'package:music_theory/keyboard/keyboard_view.dart';
 Audio _audio = Audio();
 KeyboardModel _model = KeyboardModel();
 KeyboardPresenter _presenter = KeyboardPresenter(_model);
+KeyboardView _view;
 
 
 void main() {
   _presenter.onPlayAudio.listen((event) => _audio.playNote(event.note));
-  _presenter.onKeySelected.listen((event) => _onKeySelected(event.note));
+  _presenter.onKeySelectionChanged.listen((event) => _onKeySelectionChanged(event.note, event.selected));
 
   Midi.enableMidi(_onMidiStatus, _onMidiInput);
-  KeyboardView.build(parent: querySelector('#keyboard-holder'));
+  _view = KeyboardView(_onKeyboardClick, parent: querySelector('#keyboard-holder'));
 
   // todo: obsolete keyboard
   for (int note = 48; note <= 83; ++note) {
@@ -27,8 +28,13 @@ void main() {
   _refreshChordDisplay();
 }
 
-void _onKeySelected(int note) {
-  querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
+void _onKeyboardClick(int note) {
+  _presenter.toggleKey(note);
+}
+
+void _onKeySelectionChanged(int note, bool selected) {
+  querySelector("#key-$note").classes.toggle("key-selected", selected);
+  _view.setKeySelected(note, selected);
   _refreshChordDisplay();
 }
 
