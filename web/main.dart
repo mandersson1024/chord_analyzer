@@ -13,31 +13,36 @@ KeyboardPresenter _presenter = KeyboardPresenter(_model);
 
 
 void main() {
-  _presenter.onKeySelected.listen((event) {
-    if (event.selected) _audio.playNote(event.note);
-    querySelector("#key-${event.note}").classes.toggle("key-selected", _model.getNote(event.note));
-    _refreshChordDisplay();
-  });
+  _presenter.onPlayAudio.listen((event) => _audio.playNote(event.note));
+  _presenter.onKeySelected.listen((event) => _onKeySelected(event.note));
 
+  Midi.enableMidi(_onMidiStatus, _onMidiInput);
   KeyboardView.build(parent: querySelector('#keyboard-holder'));
 
+  // todo: obsolete keyboard
   for (int note = 48; note <= 83; ++note) {
     querySelector("#key-$note").onClick.listen((_) => _presenter.toggleKey(note));
   }
 
   _refreshChordDisplay();
+}
 
-  void onMidiStatus(bool enabled) {
-    if (enabled) {
-      querySelector('#midi-enabled').text = '${WebMidi.enabled}';
-      querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-    } else {
-      window.console.warn("No MIDI");
-    }
+void _onKeySelected(int note) {
+  querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
+  _refreshChordDisplay();
+}
+
+void _onMidiStatus(bool enabled) {
+  if (enabled) {
+    querySelector('#midi-enabled').text = '${WebMidi.enabled}';
+    querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
+  } else {
+    window.console.warn("No MIDI");
   }
+}
 
-  void onMidiInput(int note, bool on) => _presenter.setKey(note, on);
-  Midi.enableMidi(onMidiStatus, onMidiInput);
+void _onMidiInput(int note, bool on) {
+  _presenter.setKey(note, on);
 }
 
 void _refreshChordDisplay() {

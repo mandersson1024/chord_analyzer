@@ -6,24 +6,31 @@ class KeyboardModel {
 
   KeyboardModel();
 
+  void _addNote(int note) {
+    if (!notes.contains(note)) {
+      notes.add(note);
+      events.fire(KeyboardNoteSelectionChanged(note, true));
+      events.fire(KeyboardPlayNote(note));
+    }
+  }
+
+  void _removeNote(int note) {
+    if (notes.contains(note)) {
+      notes.remove(note);
+      events.fire(KeyboardNoteSelectionChanged(note, false));
+    }
+  }
+
   void setNote(int note, bool on) {
     if (on) {
-      notes.add(note);
+      _addNote(note);
     } else {
-      notes.remove(note);
+      _removeNote(note);
     }
-
-    events.fire(KeyboardNoteSelectionChanged(note, on));
   }
 
   void toggleNote(int note) {
-    if (notes.contains(note)) {
-      notes.remove(note);
-    } else {
-      notes.add(note);
-    }
-
-    events.fire(KeyboardNoteSelectionChanged(note, notes.contains(note)));
+    setNote(note, !getNote(note));
   }
 
   bool getNote(int note) {
@@ -37,4 +44,10 @@ class KeyboardNoteSelectionChanged {
   bool selected;
 
   KeyboardNoteSelectionChanged(this.note, this.selected);
+}
+
+class KeyboardPlayNote {
+  int note;
+
+  KeyboardPlayNote(this.note);
 }
