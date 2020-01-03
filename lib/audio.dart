@@ -10,8 +10,9 @@ class Audio {
     if (_audioNode == null) {
       _synth = Synth()
         ..oscillator.type = "square"
-
+        ..volume.value = -10
       ;
+
       _audioNode =_synth.toMaster();
     }
   }

@@ -7,9 +7,14 @@ import "package:js/js.dart";
 class Synth {
   external AudioNode toMaster();
   OmniOscillator oscillator;
-  //volume;
+  Decibels volume;
   //envelope;
 }
+
+class Decibels {
+  num value;
+}
+
 
 @JS("Tone.AudioNode")
 class AudioNode {
