@@ -6,6 +6,9 @@ import "package:js/js.dart";
 @JS("Tone.Synth")
 class Synth {
   external AudioNode toMaster();
+  OmniOscillator oscillator;
+  //volume;
+  //envelope;
 }
 
 @JS("Tone.AudioNode")
@@ -16,3 +19,9 @@ class AudioNode {
 @JS("Tone.Instrument")
 class Instrument {
 }
+
+@JS("Tone.OmniOscillator")
+class OmniOscillator {
+  String type;
+}
+
