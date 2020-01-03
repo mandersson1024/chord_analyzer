@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'package:music_theory/audio.dart';
 import 'package:music_theory/keyboard/keyboard_model.dart';
 import 'package:music_theory/keyboard/keyboard_presenter.dart';
 import 'package:music_theory/midi.dart';
@@ -10,18 +11,14 @@ import 'package:music_theory/keyboard/keyboard_view.dart';
 
 bool get debug => true;
 
-AudioNode _synth;
+Audio _audio = Audio();
 KeyboardModel _model = KeyboardModel();
 KeyboardPresenter _presenter = KeyboardPresenter(_model);
 
 
-void _refreshKeyboardNote(int note) {
-  querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
-} 
-
 void main() {
   _presenter.onKeySelected.listen((event) {
-    if (event.selected) _playNote(event.note);
+    if (event.selected) _audio.playNote(event.note);
     _refreshKeyboardNote(event.note);
     _refreshChordDisplay();
   });
@@ -33,6 +30,10 @@ void main() {
   ;
 
   document.body.children.add(keyboard);
+
+  for (int note = 48; note <= 83; ++note) {
+    querySelector("#key-$note").onClick.listen((_) => _presenter.toggleKey(note));
+  }
 
   void onMidiStatus(bool enabled) {
     if (enabled) {
@@ -46,20 +47,18 @@ void main() {
   void onMidiInput(int note, bool on) => _presenter.setKey(note, on);
   Midi.enableMidi(onMidiStatus, onMidiInput);
   _refreshChordDisplay();
-
-  for (int note = 48; note <= 83; ++note) {
-    querySelector("#key-$note")
-      ..onClick.listen((_) {
-        if (_synth == null) _synth = Synth().toMaster();
-        _presenter.toggleKey(note);
-      });
-  }
 }
 
-void _playNote(int note) {
-  String noteName = NoteNames.name(note, ascii: true);
-  int octave = note ~/ 12;
-  _synth.triggerAttackRelease("$noteName$octave", '32n');
+void _refreshKeyboardNote(int note) {
+  querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
+}
+
+void _refreshChordDisplay() {
+  querySelector('#midi-notes').text = _model.notes.toString();
+  List<Chord> chords = Chords.analyze(_model.notes);
+  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : _chordNameToHtml(chords.first.toString());
+  (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
+  //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }
 
 List<Chord> _alternativeChords(List<Chord> chords) {
@@ -74,14 +73,6 @@ String _formatChordList(List<Chord> chords) {
   var s = chords.toString();
   var c = s.substring(1, s.length-1);
   return _chordNameToHtml(c);
-}
-
-void _refreshChordDisplay() {
-  querySelector('#midi-notes').text = _model.notes.toString();
-  List<Chord> chords = Chords.analyze(_model.notes);
-  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : _chordNameToHtml(chords.first.toString());
-  (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
-  //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }
 
 String _chordNameToHtml(String chord) {
