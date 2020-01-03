@@ -20,7 +20,7 @@ class KeyboardView {
     6 * _whiteKeyWidth,
   ];
 
-  static DivElement build() {
+  static DivElement build({ HtmlElement parent }) {
     DivElement container = DivElement();
 
     int startNote = 48;
@@ -37,6 +37,10 @@ class KeyboardView {
         ..style.left = "${_octaveWidth * octave + _positions[normalizedNote] - startOffset}px"
       ;
       container.children.add(key);
+    }
+
+    if (parent != null) {
+      parent.children.add(container);
     }
 
     return container;

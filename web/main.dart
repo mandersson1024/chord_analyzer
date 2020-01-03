@@ -3,9 +3,7 @@ import 'package:music_theory/audio.dart';
 import 'package:music_theory/keyboard/keyboard_model.dart';
 import 'package:music_theory/keyboard/keyboard_presenter.dart';
 import 'package:music_theory/midi.dart';
-import 'package:music_theory/note_names.dart';
 import 'package:music_theory/webmidi_js.dart';
-import 'package:music_theory/tone_js.dart';
 import 'package:music_theory/chords.dart';
 import 'package:music_theory/keyboard/keyboard_view.dart';
 
@@ -23,17 +21,17 @@ void main() {
     _refreshChordDisplay();
   });
 
-  DivElement keyboard = KeyboardView.build()
+  KeyboardView.build(parent: document.body)
     ..style.position = "absolute"
     ..style.top = "345px"
     ..style.left = "125px"
   ;
 
-  document.body.children.add(keyboard);
-
   for (int note = 48; note <= 83; ++note) {
     querySelector("#key-$note").onClick.listen((_) => _presenter.toggleKey(note));
   }
+
+  _refreshChordDisplay();
 
   void onMidiStatus(bool enabled) {
     if (enabled) {
@@ -46,7 +44,6 @@ void main() {
 
   void onMidiInput(int note, bool on) => _presenter.setKey(note, on);
   Midi.enableMidi(onMidiStatus, onMidiInput);
-  _refreshChordDisplay();
 }
 
 void _refreshKeyboardNote(int note) {
