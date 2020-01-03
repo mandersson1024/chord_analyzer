@@ -1,43 +1,24 @@
 import 'dart:html';
 import 'package:music_theory/keyboard/keyboard_model.dart';
 import 'package:music_theory/keyboard/keyboard_presenter.dart';
+import 'package:music_theory/midi.dart';
 import 'package:music_theory/note_names.dart';
 import 'package:music_theory/webmidi_js.dart';
 import 'package:music_theory/tone_js.dart';
 import 'package:music_theory/chords.dart';
-import 'package:music_theory/midi_input.dart';
 import 'package:music_theory/keyboard/keyboard_view.dart';
-
-MidiInput midiInput;
 
 bool get debug => true;
 
-KeyboardModel model = KeyboardModel();
-KeyboardPresenter presenter = KeyboardPresenter(model);
+AudioNode _synth;
+KeyboardModel _model = KeyboardModel();
+KeyboardPresenter _presenter = KeyboardPresenter(_model);
 
-void _enableMidi() {
-  WebMidi.enable((var error) {
-    if (error != null) {
-      window.console.warn("No MIDI");
-    } else {
-      querySelector('#midi-enabled').text = '${WebMidi.enabled}';
-      querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-      midiInput = MidiInput.setup(_onMidiInput);
-    }
-  });
-}
 
-void _onMidiInput(int note, bool on) {
-  presenter.setKey(note, on);
-  _refreshVisualKeyboardNote(note);
-  _refreshChordDisplay();
-}
 
 void _refreshVisualKeyboardNote(int note) {
-  querySelector("#key-$note").classes.toggle("key-selected", model.getNote(note));
+  querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
 } 
-
-AudioNode _synth;
 
 void main() {
   DivElement keyboard = KeyboardView.build()
@@ -48,7 +29,22 @@ void main() {
 
   document.body.children.add(keyboard);
 
-  _enableMidi();
+  void onMidiStatus(bool enabled) {
+    if (enabled) {
+      querySelector('#midi-enabled').text = '${WebMidi.enabled}';
+      querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
+    } else {
+      window.console.warn("No MIDI");
+    }
+  }
+
+  void onMidiInput(int note, bool on) {
+    _presenter.setKey(note, on);
+    _refreshVisualKeyboardNote(note);
+    _refreshChordDisplay();
+  }
+
+  Midi.enableMidi(onMidiStatus, onMidiInput);
   _refreshChordDisplay();
 
   for (int note = 48; note <= 83; ++note) {
@@ -58,7 +54,7 @@ void main() {
           _synth = Synth().toMaster();
         }
         _playNote(note);
-        presenter.toggleKey(note);
+        _presenter.toggleKey(note);
         _refreshVisualKeyboardNote(note);
         _refreshChordDisplay();
       });
@@ -86,8 +82,8 @@ String _formatChordList(List<Chord> chords) {
 }
 
 void _refreshChordDisplay() {
-  querySelector('#midi-notes').text = model.notes.toString();
-  List<Chord> chords = Chords.analyze(model.notes);
+  querySelector('#midi-notes').text = _model.notes.toString();
+  List<Chord> chords = Chords.analyze(_model.notes);
   (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : _chordNameToHtml(chords.first.toString());
   (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
   //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
