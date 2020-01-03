@@ -12,6 +12,18 @@ class KeyboardPresenter {
   }
 
   void pressKey(int note) {
-    _model.keyPressed(note);
+    _model.setNote(note, true);
+  }
+
+  void releaseKey(int note) {
+    _model.setNote(note, false);
+  }
+
+  void setKey(int note, bool on) {
+    _model.setNote(note, on);
+  }
+
+  void toggleKey(int note) {
+    _model.toggleNote(note);
   }
 }

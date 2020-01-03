@@ -30,11 +30,9 @@ class KeyboardModel {
     }
   }
 
-  /*
   bool getNote(int note) {
     return notes.contains(note);
   }
-   */
 
 }
 
