@@ -15,12 +15,17 @@ KeyboardModel _model = KeyboardModel();
 KeyboardPresenter _presenter = KeyboardPresenter(_model);
 
 
-
-void _refreshVisualKeyboardNote(int note) {
+void _refreshKeyboardNote(int note) {
   querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
 } 
 
 void main() {
+  _presenter.onKeySelected.listen((event) {
+    if (event.selected) _playNote(event.note);
+    _refreshKeyboardNote(event.note);
+    _refreshChordDisplay();
+  });
+
   DivElement keyboard = KeyboardView.build()
     ..style.position = "absolute"
     ..style.top = "345px"
@@ -38,25 +43,15 @@ void main() {
     }
   }
 
-  void onMidiInput(int note, bool on) {
-    _presenter.setKey(note, on);
-    _refreshVisualKeyboardNote(note);
-    _refreshChordDisplay();
-  }
-
+  void onMidiInput(int note, bool on) => _presenter.setKey(note, on);
   Midi.enableMidi(onMidiStatus, onMidiInput);
   _refreshChordDisplay();
 
   for (int note = 48; note <= 83; ++note) {
     querySelector("#key-$note")
       ..onClick.listen((_) {
-        if (_synth == null) {
-          _synth = Synth().toMaster();
-        }
-        _playNote(note);
+        if (_synth == null) _synth = Synth().toMaster();
         _presenter.toggleKey(note);
-        _refreshVisualKeyboardNote(note);
-        _refreshChordDisplay();
       });
   }
 }

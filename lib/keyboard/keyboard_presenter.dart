@@ -5,7 +5,7 @@ import '../event_forwarder.dart';
 class KeyboardPresenter {
 
   KeyboardModel _model;
-  EventForwarder<KeyboardNoteSelected> onKeySelected;
+  EventForwarder<KeyboardNoteSelectionChanged> onKeySelected;
 
   KeyboardPresenter(this._model) {
     onKeySelected = EventForwarder(_model.events);

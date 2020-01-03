@@ -6,20 +6,14 @@ class KeyboardModel {
 
   KeyboardModel();
 
-  void initializeViews() {
-  }
-
-  void keyPressed(int note) {
-    notes.add(note);
-    events.fire(KeyboardNoteSelected(note));
-  }
-
   void setNote(int note, bool on) {
     if (on) {
       notes.add(note);
     } else {
       notes.remove(note);
     }
+
+    events.fire(KeyboardNoteSelectionChanged(note, on));
   }
 
   void toggleNote(int note) {
@@ -28,6 +22,8 @@ class KeyboardModel {
     } else {
       notes.add(note);
     }
+
+    events.fire(KeyboardNoteSelectionChanged(note, notes.contains(note)));
   }
 
   bool getNote(int note) {
@@ -36,14 +32,9 @@ class KeyboardModel {
 
 }
 
-class KeyboardNoteSelected {
+class KeyboardNoteSelectionChanged {
   int note;
+  bool selected;
 
-  KeyboardNoteSelected(this.note);
-}
-
-class KeyboardNoteUnselected {
-  int note;
-
-  KeyboardNoteUnselected(this.note);
+  KeyboardNoteSelectionChanged(this.note, this.selected);
 }
