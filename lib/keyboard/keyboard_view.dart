@@ -4,7 +4,7 @@ typedef KeyboardClickCallback = void Function(int note);
 
 class KeyboardView {
 
-  static const int _whiteKeyWidth = 40;
+  static const int _whiteKeyWidth = 41;
   static const int _blackKeyWidth = 25;
   static const int _octaveWidth = _whiteKeyWidth * 7;
   static List<int> _positions = [
@@ -34,21 +34,29 @@ class KeyboardView {
 
     int startNote = 48;
     int numKeys = 36;
-    int startOffset = (startNote ~/ 12) * _octaveWidth;
+    int numWhiteKeysCounter = 0;
 
     for (int i = 0; i < numKeys; ++i) {
       int note = startNote + i;
       int normalizedNote = note % 12;
-      int octave = note ~/ 12;
+      int octave = i ~/ 12;
 
       var key = _createKey(note, parent: div)
-        ..style.position = "absolute"
-        ..style.left = "${_octaveWidth * octave + _positions[normalizedNote] - startOffset}px"
+        ..style.left = "${_octaveWidth * octave + _positions[normalizedNote]}px"
         ..onClick.listen((_) => clickCallback(note))
       ;
 
+      if (!_isBlackKey(note)) {
+        ++numWhiteKeysCounter;
+      }
+
       _keys[note] = key;
     }
+
+    div
+      ..style.position = "absolute"
+      ..style.width = "${numWhiteKeysCounter * _whiteKeyWidth}px"
+    ;
   }
 
   DivElement _createKey(int midiNote, { HtmlElement parent }) {

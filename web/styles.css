@@ -48,9 +48,8 @@ sup {
 }
 
 #keyboard-holder {
-  position: absolute;
-  left: 125px;
-  /*margin: 0 auto;*/
+  display: flex;
+  justify-content: center;
 }
 
 .white-key {
