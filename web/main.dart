@@ -7,8 +7,6 @@ import 'package:music_theory/webmidi_js.dart';
 import 'package:music_theory/chords.dart';
 import 'package:music_theory/keyboard/keyboard_view.dart';
 
-bool get debug => true;
-
 Audio _audio = Audio();
 KeyboardModel _model = KeyboardModel();
 KeyboardPresenter _presenter = KeyboardPresenter(_model);
@@ -17,15 +15,11 @@ KeyboardPresenter _presenter = KeyboardPresenter(_model);
 void main() {
   _presenter.onKeySelected.listen((event) {
     if (event.selected) _audio.playNote(event.note);
-    _refreshKeyboardNote(event.note);
+    querySelector("#key-${event.note}").classes.toggle("key-selected", _model.getNote(event.note));
     _refreshChordDisplay();
   });
 
-  KeyboardView.build(parent: document.body)
-    ..style.position = "absolute"
-    ..style.top = "345px"
-    ..style.left = "125px"
-  ;
+  KeyboardView.build(parent: querySelector('#keyboard-holder'));
 
   for (int note = 48; note <= 83; ++note) {
     querySelector("#key-$note").onClick.listen((_) => _presenter.toggleKey(note));
@@ -44,10 +38,6 @@ void main() {
 
   void onMidiInput(int note, bool on) => _presenter.setKey(note, on);
   Midi.enableMidi(onMidiStatus, onMidiInput);
-}
-
-void _refreshKeyboardNote(int note) {
-  querySelector("#key-$note").classes.toggle("key-selected", _model.getNote(note));
 }
 
 void _refreshChordDisplay() {

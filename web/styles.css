@@ -47,6 +47,12 @@ sup {
   color: grey;
 }
 
+#keyboard-holder {
+  position: absolute;
+  top: 345px;
+  left: 125px;
+}
+
 #keyboard {
   position: relative;
   margin: 0 auto;
