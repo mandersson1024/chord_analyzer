@@ -19,12 +19,6 @@ void main() {
 
   Midi.enableMidi(_onMidiStatus, _onMidiInput);
   _view = KeyboardView(_onKeyboardClick, parent: querySelector('#keyboard-holder'));
-
-  // todo: obsolete keyboard
-  for (int note = 48; note <= 83; ++note) {
-    querySelector("#key-$note").onClick.listen((_) => _presenter.toggleKey(note));
-  }
-
   _refreshChordDisplay();
 }
 
@@ -33,7 +27,6 @@ void _onKeyboardClick(int note) {
 }
 
 void _onKeySelectionChanged(int note, bool selected) {
-  querySelector("#key-$note").classes.toggle("key-selected", selected);
   _view.setKeySelected(note, selected);
   _refreshChordDisplay();
 }

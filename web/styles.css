@@ -49,14 +49,8 @@ sup {
 
 #keyboard-holder {
   position: absolute;
-  top: 345px;
   left: 125px;
-}
-
-#keyboard {
-  position: relative;
-  margin: 0 auto;
-  width: calc(21*40px); /* 21 white keys */
+  /*margin: 0 auto;*/
 }
 
 .white-key {
