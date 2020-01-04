@@ -27,21 +27,21 @@ class NoteNames {
 
 class DiatonicParser {
 
-  static const Map<int, int> diatonicMap =  {
-    1: 0,
-    2: 2,
-    3: 4,
-    4: 5,
-    5: 7,
-    6: 9,
-    7: 11,
-    8: 0,
-    9: 2,
-    10: 4,
-    11: 5,
-    12: 7,
-    13: 9,
-    14: 11,
+  static const Map<String, int> diatonicMap =  {
+    "1": 0,
+    "2": 2,
+    "3": 4,
+    "4": 5,
+    "5": 7,
+    "6": 9,
+    "7": 11,
+    "8": 0,
+    "9": 2,
+    "10": 4,
+    "11": 5,
+    "12": 7,
+    "13": 9,
+    "14": 11,
   };
 
   static const Map<String, int> accidentalMap =  {
@@ -52,11 +52,9 @@ class DiatonicParser {
   static int parse(String name) {
     if (name.startsWith("#") || name.startsWith("b")) {
       String diatonicName = name.substring(1);
-      int diatonic = int.parse(diatonicName);
-      return diatonicMap[diatonic] + accidentalMap[name[0]];
+      return diatonicMap[diatonicName] + accidentalMap[name[0]];
     } else {
-      int diatonic = int.parse(name);
-      return diatonicMap[diatonic];
+      return diatonicMap[name];
     }
   }
 

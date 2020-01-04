@@ -3,26 +3,57 @@ import "package:collection/collection.dart";
 import "package:music_theory/note_names.dart";
 
 class ChordType {
+
+  //
+  // https://en.wikibooks.org/wiki/Music_Theory/Complete_List_of_Chord_Patterns
+  //
+
   static final List<ChordType> allValidChords = [
     //major
     ChordType.major,
     ChordType.majorSeventh,
-    ChordType.majorSeventhNo3,
-    ChordType.majorSeventhNo5,
     ChordType.majorNinth,
-    ChordType.majorNinthNo3,
-    ChordType.majorNinthNo5,
+    ChordType.major13th,
+    ChordType.majorSixth,
+    ChordType.majorSixthNinth,
+    ChordType.majorLydian,
+    ChordType.majorSeventhFlat6,
 
-    ChordType.sus2,
-    ChordType.m,
+    // dominant/seventh (normal)
+    ChordType.dominantSeventh,
+    ChordType.dominantNinth,
+    ChordType.dominantThirteenth,
+    ChordType.lydianDominantSeventh,
+
+    // dominant/seventh (altered)
+    ChordType.dominantFlat9,
+    ChordType.dominantSharp9,
+    ChordType.altered,
+
+    // dominant/seventh (suspended)
     ChordType.sus4,
-    ChordType.aug,
-    ChordType.dim,
+    ChordType.sus2,
+    ChordType.sus47,
+    ChordType.eleventh,
+    ChordType.sus4Flat9,
 
-    ChordType.m6,
-    ChordType.sixth,
-    ChordType.m7,
-    ChordType.majorSeventh,
+    // minor
+    ChordType.minor,
+    ChordType.minor7,
+    ChordType.minorMajor7,
+    ChordType.minor6,
+    ChordType.minor9,
+    ChordType.minor11,
+    ChordType.minor13,
+
+    // diminished
+    ChordType.dim,
+    ChordType.dim7,
+    ChordType.halfDim,
+
+    //other
+    ChordType.aug,
+    ChordType.aug7,
   ];
 
   static final ChordType undefined = ChordType("", "undefined");
@@ -30,25 +61,48 @@ class ChordType {
   // major
   static final ChordType major = ChordType("1,3,5", "");
   static final ChordType majorSeventh = ChordType("1,3,5,7", "maj7");
-  static final ChordType majorSeventhNo3 = ChordType("1,5,7", "maj7<sup>(no3)</sup>");
-  static final ChordType majorSeventhNo5 = ChordType("1,3,7", "maj7<sup>(no5)</sup>");
+  static final ChordType majorSeventhFlat6 = ChordType("1,3,5,7,b13", "maj7♭6");
   static final ChordType majorNinth = ChordType("1,3,5,7,9", "maj9");
-  static final ChordType majorNinthNo3 = ChordType("1,5,7,9", "maj9<sup>(no3)</sup>");
-  static final ChordType majorNinthNo5 = ChordType("1,3,7,9", "maj9<sup>(no5)</sup>");
+  static final ChordType major13th = ChordType("1,3,5,7,9,11,13", "maj13");
+  static final ChordType majorSixth = ChordType("1,3,5,6", "6");
+  static final ChordType majorSixthNinth = ChordType("1,3,5,6,9", "6/9");
+  static final ChordType majorLydian = ChordType("1,3,5,7,#11", "maj♯11");
 
-  // triads
-  static final ChordType m = ChordType("1,b3,5", "m");
-  static final ChordType sus2 = ChordType("1,2,5", "sus2");
+  // dominant/seventh (normal)
+  static final ChordType dominantSeventh = ChordType("1,3,5,b7", "7");
+  static final ChordType dominantNinth = ChordType("1,3,5,b7,9", "9");
+  static final ChordType dominantThirteenth = ChordType("1,3,5,b7,9,13", "13");
+  static final ChordType lydianDominantSeventh = ChordType("1,3,5,b7,#11", "7♯11");
+
+  // dominant/seventh (altered)
+  static final ChordType dominantFlat9 = ChordType("1,3,5,b7,b9", "7♭9");
+  static final ChordType dominantSharp9 = ChordType("1,3,5,b7,#9", "7♯9");
+  static final ChordType altered = ChordType("1,3,b7", "alt7");
+
+  // dominant/seventh (suspended)
   static final ChordType sus4 = ChordType("1,4,5", "sus4");
+  static final ChordType sus2 = ChordType("1,2,5", "sus2");
+  static final ChordType sus47 = ChordType("1,4,5,b7", "7sus4");
+  static final ChordType eleventh = ChordType("1,5,b7,9,11", "11");
+  static final ChordType sus4Flat9 = ChordType("1,4,5,b9", "♭9sus");
+
+  // minor
+  static final ChordType minor = ChordType("1,b3,5", "m");
+  static final ChordType minor7 = ChordType("1,b3,5,b7", "m7");
+  static final ChordType minorMajor7 = ChordType("1,b3,5,7", "m/maj7");
+  static final ChordType minor6 = ChordType("1,b3,5,6", "m6");
+  static final ChordType minor9 = ChordType("1,b3,5,b7,9", "m9");
+  static final ChordType minor11 = ChordType("1,b3,5,b7,9,11", "m11");
+  static final ChordType minor13 = ChordType("1,b3,5,b7,9,13", "m13");
+
+  // diminished
   static final ChordType dim = ChordType("1,b3,b5", "<sup>o</sup>");
+  static final ChordType dim7 = ChordType("1,b3,b5,6", "<sup>o</sup>7");
+  static final ChordType halfDim = ChordType("1,b3,b5,b7", "<sup>ø</sup>");
+
+  // other
   static final ChordType aug = ChordType("1,3,#5", "+");
-
-  // sixths
-  static final ChordType sixth = ChordType("1,3,5,6", "<sup>6</sup>");
-  static final ChordType m6 = ChordType("1,b3,5,6", "m<sup>6</sup>");
-
-  // sevenths
-  static final ChordType m7 = ChordType("1,b3,5,b7", "m<sup>7</sup>");
+  static final ChordType aug7 = ChordType("1,3,#5,7", "7♯5");
 
   List<int> definition;
   String notation;
@@ -92,6 +146,7 @@ class Chords {
 
   static ChordType match(List<int> normalizedNotes) {
     for (ChordType ctype in ChordType.allValidChords) {
+      //print("comparing ${normalizedNotes} with ${ctype.definition} ($ctype)");
       if (ListEquality().equals(normalizedNotes, ctype.definition)) {
         return ctype;
       }

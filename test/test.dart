@@ -74,23 +74,24 @@ void _chordsTest() {
 
   // triads
   test("", () => expect(Chords.getChord(60, [0, 4, 7]).type, ChordType.major));
-  test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.m));
+  test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.minor));
   test("", () => expect(Chords.getChord(60, [0, 3, 6]).type, ChordType.dim));
   test("", () => expect(Chords.getChord(60, [0, 4, 8]).type, ChordType.aug));
   test("", () => expect(Chords.getChord(60, [0, 2, 7]).type, ChordType.sus2));
   test("", () => expect(Chords.getChord(60, [0, 5, 7]).type, ChordType.sus4));
 
-  test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
+  test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.minor7));
   test("", () => expect(Chords.getChord(60, [0, 4, 7, 11]).type, ChordType.majorSeventh));
   test("", () => expect(Chords.getChord(60, [0, 4, 7, 11, 14]).type, ChordType.majorNinth));
+  test("", () => expect(Chords.getChord(60, [0, 4, 7, 11, 14, 17, 21]).type, ChordType.major13th));
 
   test("duplicates of notes", () => expect(Chords.analyze({60, 60, 64, 67}), equals([Chord("C", ChordType.major)])));
   test("same note in octaves", () => expect(Chords.analyze({60, 64, 67, 72}), equals([Chord("C", ChordType.major)])));
 
   test("", () => expect(Chords.analyze({60, 62, 67}), equals([Chord("C", ChordType.sus2), Chord("G", ChordType.sus4)])));
-  test("", () => expect(Chords.analyze({60, 63, 67}), equals([Chord("C", ChordType.m)])));
+  test("", () => expect(Chords.analyze({60, 63, 67}), equals([Chord("C", ChordType.minor)])));
   test("", () => expect(Chords.analyze({60, 64, 67}), equals([Chord("C", ChordType.major)])));
-  test("", () => expect(Chords.analyze({60, 64, 67, 69}), equals([Chord("C", ChordType.sixth), Chord("A", ChordType.m7)])));
-  test("", () => expect(Chords.analyze({60, 63, 67, 69}), equals([Chord("C", ChordType.m6)])));
+  test("", () => expect(Chords.analyze({60, 64, 67, 69}), equals([Chord("C", ChordType.majorSixth), Chord("A", ChordType.minor7)])));
+  test("", () => expect(Chords.analyze({60, 63, 67, 69}), equals([Chord("C", ChordType.minor6)])));
   test("", () => expect(Chords.analyze({60, 65, 67}), equals([Chord("C", ChordType.sus4), Chord("F", ChordType.sus2)])));
 }
