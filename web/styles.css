@@ -22,12 +22,12 @@ html, body {
 }
 
 sup {
-  font-size: 65%;
+  font-size: 62%;
   vertical-align: super;
   line-height: 0;
 }
 
-sup small {
+small {
   font-size: 62%;
 }
 

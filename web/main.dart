@@ -47,7 +47,7 @@ void _refreshChordDisplay() {
   querySelector('#midi-notes').text = "$notes";
   List<Chord> chords = Chords.analyze(_model.notes);
   //List<Chord> chords = Chords.analyze({60, 62, 67});
-  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : chords.first.toString();
+  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : "${chords.first}";
   (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
 }
 
