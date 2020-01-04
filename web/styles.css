@@ -27,29 +27,41 @@ sup {
 }
 
 #chord {
-  /*position: relative;*/
   width: 100%;
   text-align: center;
-  font-size: 180px;
-  height: 150px;
-  padding-top: 50px;
-  /*line-height: 200px;*/
+  font-size: 20vh;
+  height: 15vh;
+  line-height: 15vh;
+  padding-top: 10vh;
 }
 
 #alternative-chords {
   position: relative;
   width: 100%;
   text-align: center;
-  padding-top: 40px;
-  font-size: 45px;
-  height: 70px;
-  line-height: 70px;
+  padding-top: 4vh;
+  font-size: 7vh;
+  height: 12vh;
+  line-height: 12vh;
   color: grey;
 }
 
 #keyboard-holder {
   display: flex;
+  padding-top: 8vh;
   justify-content: center;
+}
+
+@media (max-width:1024px){
+  #keyboard-holder {
+    transform: scale(0.75);
+  }
+}
+
+@media (max-height:512px){
+  #keyboard-holder {
+    transform: scale(0.75);
+  }
 }
 
 .white-key {

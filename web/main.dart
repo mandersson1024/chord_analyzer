@@ -44,6 +44,7 @@ void _onMidiInput(int note, bool on) {
 void _refreshChordDisplay() {
   querySelector('#midi-notes').text = _model.notes.toList().toString();
   List<Chord> chords = Chords.analyze(_model.notes);
+  //List<Chord> chords = Chords.analyze({60, 62, 67});
   (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : _chordNameToHtml(chords.first.toString());
   (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
   //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
