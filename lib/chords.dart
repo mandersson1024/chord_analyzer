@@ -22,7 +22,7 @@ class ChordType {
 
   // triads
   static final ChordType major = ChordType("1,3,5", "");
-  static final ChordType m = ChordType("1,b3,5", "-");
+  static final ChordType m = ChordType("1,b3,5", "m");
   static final ChordType dim = ChordType("1,b3,b5", "<sup>o</sup>");
   static final ChordType aug = ChordType("1,3,#5", "+");
 
@@ -35,14 +35,14 @@ class ChordType {
   static final ChordType m7 = ChordType("1,b3,5,b7", "m<sup>7</sup>");
 
   List<int> definition;
-  String jazzNotation;
+  String notation;
 
-  ChordType(String definitionString, this.jazzNotation) {
+  ChordType(String definitionString, this.notation) {
     definition = DiatonicParser.parseChord(definitionString);
   }
 
   String toString() {
-    return jazzNotation;
+    return notation;
   }
 }
 
@@ -56,7 +56,7 @@ class Chord {
     if (type == ChordType.undefined) {
       return "n.c.";
     } else {
-      return noteName + type.jazzNotation;
+      return noteName + type.notation;
     }
   }
 
