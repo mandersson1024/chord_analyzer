@@ -45,9 +45,8 @@ void _refreshChordDisplay() {
   querySelector('#midi-notes').text = _model.notes.toList().toString();
   List<Chord> chords = Chords.analyze(_model.notes);
   //List<Chord> chords = Chords.analyze({60, 62, 67});
-  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : _chordNameToHtml(chords.first.toString());
+  (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : chords.first.toString();
   (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));
-  //querySelector('#scales').text = '${Scale.match(Set.from(chord.notes))}';
 }
 
 List<Chord> _alternativeChords(List<Chord> chords) {
@@ -60,15 +59,5 @@ List<Chord> _alternativeChords(List<Chord> chords) {
 
 String _formatChordList(List<Chord> chords) {
   var s = chords.toString();
-  var c = s.substring(1, s.length-1);
-  return _chordNameToHtml(c);
-}
-
-String _chordNameToHtml(String chord) {
-  // todo: maybe the HTML formatting needs to know about the ChordType and not just the String representation
-  chord = chord.replaceAll("#", "<sup>#<\/sup>");
-  chord = chord.replaceAll("b", "<sup>b<\/sup>");
-  chord = chord.replaceAll("♯", "<sup>♯<\/sup>");
-  chord = chord.replaceAll("♭", "<sup>♭<\/sup>");
-  return chord;
+  return s.substring(1, s.length-1);
 }
