@@ -4,10 +4,13 @@ import "package:music_theory/note_names.dart";
 
 class ChordType {
   static final List<ChordType> allValidChords = [
-    //triads
+    //major
+    ChordType.major,
+    ChordType.majorSeventh,
+    ChordType.majorSeventhNo5,
+
     ChordType.sus2,
     ChordType.m,
-    ChordType.major,
     ChordType.sus4,
     ChordType.aug,
     ChordType.dim,
@@ -15,23 +18,28 @@ class ChordType {
     ChordType.m6,
     ChordType.sixth,
     ChordType.m7,
-    ChordType.seventh,
+    ChordType.majorSeventh,
   ];
 
   static final ChordType undefined = ChordType("", "undefined");
 
-  // triads
+  // major
   static final ChordType major = ChordType("1,3,5", "");
+  static final ChordType majorSeventh = ChordType("1,3,5,7", "Maj7");
+  static final ChordType majorSeventhNo5 = ChordType("1,3,7", "Maj7<sup>(no5)</sup>");
+
+  // triads
   static final ChordType m = ChordType("1,b3,5", "m");
+  static final ChordType sus2 = ChordType("1,2,5", "sus2");
+  static final ChordType sus4 = ChordType("1,4,5", "sus4");
   static final ChordType dim = ChordType("1,b3,b5", "<sup>o</sup>");
   static final ChordType aug = ChordType("1,3,#5", "+");
 
-  // sevenths
-  static final ChordType sus2 = ChordType("1,2,5", "sus2");
-  static final ChordType sus4 = ChordType("1,4,5", "sus4");
+  // sixths
   static final ChordType sixth = ChordType("1,3,5,6", "<sup>6</sup>");
   static final ChordType m6 = ChordType("1,b3,5,6", "m<sup>6</sup>");
-  static final ChordType seventh = ChordType("1,3,5,b7", "<sup>7</sup>");
+
+  // sevenths
   static final ChordType m7 = ChordType("1,b3,5,b7", "m<sup>7</sup>");
 
   List<int> definition;

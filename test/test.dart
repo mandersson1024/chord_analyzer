@@ -81,7 +81,7 @@ void _chordsTest() {
   test("", () => expect(Chords.getChord(60, [0, 5, 7]).type, ChordType.sus4));
 
   test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
-  test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.seventh));
+  test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.majorSeventh));
 
   test("duplicates of notes", () => expect(Chords.analyze({60, 60, 64, 67}), equals([Chord("C", ChordType.major)])));
   test("same note in octaves", () => expect(Chords.analyze({60, 64, 67, 72}), equals([Chord("C", ChordType.major)])));
