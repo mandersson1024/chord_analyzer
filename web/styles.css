@@ -27,6 +27,10 @@ sup {
   line-height: 0;
 }
 
+sup small {
+  font-size: 62%;
+}
+
 #chord {
   width: 100%;
   text-align: center;

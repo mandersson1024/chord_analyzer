@@ -11,6 +11,10 @@ class ChordType {
   static final List<ChordType> allValidChords = [
     //major
     ChordType.major,
+    ChordType.major.no(["5"]),
+    ChordType.major.no(["3","5"]),
+    ChordType.major.add(["6"]),
+    ChordType.major.add(["6","7"]),
     ChordType.majorSeventh,
     ChordType.majorNinth,
     ChordType.major13th,
@@ -104,11 +108,26 @@ class ChordType {
   static final ChordType aug = ChordType("1,3,#5", "+");
   static final ChordType aug7 = ChordType("1,3,#5,7", "7♯5");
 
+  String definitionString;
   List<int> definition;
   String notation;
 
-  ChordType(String definitionString, this.notation) {
+  ChordType(this.definitionString, this.notation) {
     definition = DiatonicParser.parseChord(definitionString);
+  }
+
+  ChordType no(List<String> notes) {
+    List<String> diatonicNotes = definitionString.split(",");
+    diatonicNotes.removeWhere((String note) => notes.contains(note));
+    ChordType variation = ChordType(diatonicNotes.join(","), "$notation<sup>(<small>no</small>${notes.join(",")})</sup>");
+    return variation;
+  }
+
+  ChordType add(List<String> notes) {
+    List<String> diatonicNotes = definitionString.split(",");
+    diatonicNotes.addAll(notes);
+    ChordType variation = ChordType(diatonicNotes.join(","), "$notation<sup>(<small>add</small>${notes.join(",")})</sup>");
+    return variation;
   }
 
   String toString() {
