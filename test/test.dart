@@ -1,11 +1,13 @@
 import "package:test/test.dart";
 
+import "package:collection/collection.dart";
 import "package:music_theory/note_names.dart";
 import "package:music_theory/chords.dart";
 
 void main() {
   group("note_names", _noteNamesTest);
   group("diatonic_to_chromatic", _diatonicStepToChromaticTest);
+  group("check for duplicated chord types", _duplicatedChordsTest);
   group("chords", _chordsTest);
 }
 
@@ -87,11 +89,16 @@ void _chordsTest() {
 
   test("duplicates of notes", () => expect(Chords.analyze({60, 60, 64, 67}), equals([Chord("C", ChordType.major)])));
   test("same note in octaves", () => expect(Chords.analyze({60, 64, 67, 72}), equals([Chord("C", ChordType.major)])));
+}
 
-  test("", () => expect(Chords.analyze({60, 62, 67}), equals([Chord("C", ChordType.sus2), Chord("G", ChordType.sus4)])));
-  test("", () => expect(Chords.analyze({60, 63, 67}), equals([Chord("C", ChordType.minor)])));
-  test("", () => expect(Chords.analyze({60, 64, 67}), equals([Chord("C", ChordType.major)])));
-  test("", () => expect(Chords.analyze({60, 64, 67, 69}), equals([Chord("C", ChordType.majorSixth), Chord("A", ChordType.minor7)])));
-  test("", () => expect(Chords.analyze({60, 63, 67, 69}), equals([Chord("C", ChordType.minor6)])));
-  test("", () => expect(Chords.analyze({60, 65, 67}), equals([Chord("C", ChordType.sus4), Chord("F", ChordType.sus2)])));
+void _duplicatedChordsTest() {
+  for (ChordType chordType1 in ChordType.allValidChords) {
+    for (ChordType chordType2 in ChordType.allValidChords) {
+      if (chordType1 != chordType2) {
+        if(ListEquality().equals(chordType1.definition, chordType2.definition)) {
+          print("$chordType1 == $chordType2");
+        }
+      }
+    }
+  }
 }
