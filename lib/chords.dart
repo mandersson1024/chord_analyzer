@@ -11,7 +11,9 @@ class ChordType {
   static final List<ChordType> allValidChords = [
     //major
     ChordType.major,
+    ChordType.major.no("3"),
     ChordType.majorSeventh,
+    ChordType.majorSeventh.no("3"),
     ChordType.majorSeventh.no("5"),
     ChordType.majorNinth,
     ChordType.majorNinth.no("5"),
@@ -53,6 +55,7 @@ class ChordType {
 
     // dominant/seventh (normal)
     ChordType.dominantSeventh,
+    ChordType.dominantSeventh.no("3"),
     //ChordType.dominantSeventh.no("5"), // duplicated by simpler chord
     ChordType.dominantNinth,
     ChordType.dominantNinth.no("5"),
@@ -78,19 +81,46 @@ class ChordType {
 
     // dominant/seventh (suspended)
     ChordType.sus4,
+    ChordType.sus4.no("5"),
     ChordType.sus2,
+    ChordType.sus2.no("5"),
     ChordType.sus47,
+    ChordType.sus47.no("5"),
     ChordType.eleventh,
+    ChordType.eleventh.no("5"),
+    ChordType.eleventh.no("9"),
+    ChordType.eleventh.no("5,9"),
     ChordType.sus4Flat9,
+    ChordType.sus4Flat9.no("5"),
 
     // minor
     ChordType.minor,
     ChordType.minor7,
+    ChordType.minor7.no("5"),
     ChordType.minorMajor7,
+    ChordType.minorMajor7.add("9"),
+    ChordType.minorMajor7.add("9,13"),
+    ChordType.minorMajor7.add("9,b13"),
+    ChordType.minorMajor7.add("13"),
+    ChordType.minorMajor7.add("b13"),
+    ChordType.minorMajor7.no("5"),
+    ChordType.minorMajor7.no("5").add("9"),
+    ChordType.minorMajor7.no("5").add("9,13"),
+    ChordType.minorMajor7.no("5").add("9,b13"),
+    ChordType.minorMajor7.no("5").add("13"),
+    ChordType.minorMajor7.no("5").add("b13"),
     ChordType.minor6,
+    ChordType.minor6.no("5"),
     ChordType.minor9,
+    ChordType.minor9.no("5"),
     ChordType.minor11,
+    ChordType.minor11.no("5"),
+    ChordType.minor11.no("5,9"),
+    ChordType.minor11.no("9"),
     ChordType.minor13,
+    ChordType.minor13.no("5"),
+    ChordType.minor13.no("5,9"),
+    ChordType.minor13.no("9"),
 
     // diminished
     ChordType.dim,
