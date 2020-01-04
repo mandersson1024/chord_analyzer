@@ -53,14 +53,15 @@ class Chord {
 class Chords {
 
   static ChordType match(List<int> normalizedNotes) {
-    if (ListEquality().equals(normalizedNotes, [0, 2, 7])) return ChordType.sus2;
-    if (ListEquality().equals(normalizedNotes, [0, 3, 7])) return ChordType.m;
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7])) return ChordType.major;
-    if (ListEquality().equals(normalizedNotes, [0, 5, 7])) return ChordType.sus4;
-    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 9])) return ChordType.m6;
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 9])) return ChordType.sixth;
-    if (ListEquality().equals(normalizedNotes, [0, 3, 7, 10])) return ChordType.m7;
-    if (ListEquality().equals(normalizedNotes, [0, 4, 7, 10])) return ChordType.seventh;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,2,5"))) return ChordType.sus2;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,b3,5"))) return ChordType.m;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,3,5"))) return ChordType.major;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,4,5"))) return ChordType.sus4;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,b3,5,6"))) return ChordType.m6;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,3,5,6"))) return ChordType.sixth;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,b3,5,b7"))) return ChordType.m7;
+    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,3,5,b7"))) return ChordType.seventh;
+
     return ChordType.undefined;
   }
 
