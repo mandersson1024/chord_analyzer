@@ -3,24 +3,43 @@ import "package:collection/collection.dart";
 import "package:music_theory/note_names.dart";
 
 class ChordType {
-  static final ChordType undefined = ChordType("", "");
-  static final ChordType major = ChordType("", "");
-  static final ChordType m = ChordType("m", "-");
-  static final ChordType sus2 = ChordType.same("sus2");
-  static final ChordType sus4 = ChordType.same("sus4");
-  static final ChordType sixth = ChordType.same("<sup>6</sup>");
-  static final ChordType m6 = ChordType.same("m<sup>6</sup>");
-  static final ChordType seventh = ChordType.same("<sup>7</sup>");
-  static final ChordType m7 = ChordType.same("m<sup>7</sup>");
+  static final List<ChordType> allValidChords = [
+    ChordType.sus2,
+    ChordType.m,
+    ChordType.major,
+    ChordType.sus4,
+    ChordType.m6,
+    ChordType.sixth,
+    ChordType.m7,
+    ChordType.seventh,
+  ];
 
+  static final ChordType undefined = ChordType("", "", "undefined");
+  static final ChordType major = ChordType("1,3,5", "", "");
+  static final ChordType m = ChordType("1,b3,5", "m", "-");
+  static final ChordType sus2 = ChordType.sameName("1,2,5", "sus2");
+  static final ChordType sus4 = ChordType.sameName("1,4,5", "sus4");
+  static final ChordType sixth = ChordType.sameName("1,3,5,6", "<sup>6</sup>");
+  static final ChordType m6 = ChordType.sameName("1,b3,5,6", "m<sup>6</sup>");
+  static final ChordType seventh = ChordType.sameName("1,3,5,b7", "<sup>7</sup>");
+  static final ChordType m7 = ChordType.sameName("1,b3,5,b7", "m<sup>7</sup>");
+
+  List<int> definition;
   String rockName;
   String jazzName;
 
-  ChordType(this.rockName, this.jazzName);
+  ChordType(String definitionString, this.rockName, this.jazzName) {
+    definition = DiatonicParser.parseChord(definitionString);
+  }
 
-  ChordType.same(String name) {
+  ChordType.sameName(String definitionString, String name) {
+    definition = DiatonicParser.parseChord(definitionString);
     rockName = name;
     jazzName = name;
+  }
+
+  String toString() {
+    return rockName;
   }
 }
 
@@ -53,14 +72,11 @@ class Chord {
 class Chords {
 
   static ChordType match(List<int> normalizedNotes) {
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,2,5"))) return ChordType.sus2;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,b3,5"))) return ChordType.m;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,3,5"))) return ChordType.major;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,4,5"))) return ChordType.sus4;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,b3,5,6"))) return ChordType.m6;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,3,5,6"))) return ChordType.sixth;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,b3,5,b7"))) return ChordType.m7;
-    if (ListEquality().equals(normalizedNotes, DiatonicParser.parseChord("1,3,5,b7"))) return ChordType.seventh;
+    for (ChordType ctype in ChordType.allValidChords) {
+      if (ListEquality().equals(normalizedNotes, ctype.definition)) {
+        return ctype;
+      }
+    }
 
     return ChordType.undefined;
   }

@@ -61,8 +61,12 @@ class DiatonicParser {
   }
 
   static List<int> parseChord(String chord) {
-    List<String> notes = chord.split(",");
-    return notes.map((String name) => DiatonicParser.parse(name)).toList();
+    if (chord.isEmpty) {
+      return [];
+    } else {
+      List<String> notes = chord.split(",");
+      return notes.map((String name) => DiatonicParser.parse(name)).toList();
+    }
   }
 
 }
