@@ -18,38 +18,31 @@ class ChordType {
     ChordType.seventh,
   ];
 
-  static final ChordType undefined = ChordType("", "", "undefined");
+  static final ChordType undefined = ChordType("", "undefined");
 
   // triads
-  static final ChordType major = ChordType("1,3,5", "", "");
-  static final ChordType m = ChordType("1,b3,5", "m", "-");
-  static final ChordType dim = ChordType("1,b3,b5", "dim", "o");
-  static final ChordType aug = ChordType("1,3,#5", "aug", "+");
+  static final ChordType major = ChordType("1,3,5", "");
+  static final ChordType m = ChordType("1,b3,5", "-");
+  static final ChordType dim = ChordType("1,b3,b5", "<sup>o</sup>");
+  static final ChordType aug = ChordType("1,3,#5", "+");
 
   // sevenths
-  static final ChordType sus2 = ChordType.sameName("1,2,5", "sus2");
-  static final ChordType sus4 = ChordType.sameName("1,4,5", "sus4");
-  static final ChordType sixth = ChordType.sameName("1,3,5,6", "<sup>6</sup>");
-  static final ChordType m6 = ChordType.sameName("1,b3,5,6", "m<sup>6</sup>");
-  static final ChordType seventh = ChordType.sameName("1,3,5,b7", "<sup>7</sup>");
-  static final ChordType m7 = ChordType.sameName("1,b3,5,b7", "m<sup>7</sup>");
+  static final ChordType sus2 = ChordType("1,2,5", "sus2");
+  static final ChordType sus4 = ChordType("1,4,5", "sus4");
+  static final ChordType sixth = ChordType("1,3,5,6", "<sup>6</sup>");
+  static final ChordType m6 = ChordType("1,b3,5,6", "m<sup>6</sup>");
+  static final ChordType seventh = ChordType("1,3,5,b7", "<sup>7</sup>");
+  static final ChordType m7 = ChordType("1,b3,5,b7", "m<sup>7</sup>");
 
   List<int> definition;
-  String rockName;
-  String jazzName;
+  String jazzNotation;
 
-  ChordType(String definitionString, this.rockName, this.jazzName) {
+  ChordType(String definitionString, this.jazzNotation) {
     definition = DiatonicParser.parseChord(definitionString);
-  }
-
-  ChordType.sameName(String definitionString, String name) {
-    definition = DiatonicParser.parseChord(definitionString);
-    rockName = name;
-    jazzName = name;
   }
 
   String toString() {
-    return rockName;
+    return jazzNotation;
   }
 }
 
@@ -63,7 +56,7 @@ class Chord {
     if (type == ChordType.undefined) {
       return "n.c.";
     } else {
-      return noteName + type.rockName;
+      return noteName + type.jazzNotation;
     }
   }
 
