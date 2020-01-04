@@ -42,7 +42,9 @@ void _onMidiInput(int note, bool on) {
 }
 
 void _refreshChordDisplay() {
-  querySelector('#midi-notes').text = _model.notes.toList().toString();
+  var notes = _model.notes.toList();
+  notes.sort();
+  querySelector('#midi-notes').text = "$notes";
   List<Chord> chords = Chords.analyze(_model.notes);
   //List<Chord> chords = Chords.analyze({60, 62, 67});
   (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : chords.first.toString();

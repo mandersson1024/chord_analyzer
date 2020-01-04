@@ -56,15 +56,15 @@ void _diatonicStepToChromaticTest() {
   test("", () => expect(DiatonicParser.parse("b7"), 10));
   test("", () => expect(DiatonicParser.parse("7"), 11));
 
-  test("", () => expect(DiatonicParser.parse("8"), 12 + 0)); // 1
-  test("", () => expect(DiatonicParser.parse("#8"), 12 + 1)); // #1
-  test("", () => expect(DiatonicParser.parse("b9"), 12 + 1)); // b2
-  test("", () => expect(DiatonicParser.parse("9"), 12 + 2)); // 2
-  test("", () => expect(DiatonicParser.parse("#9"), 12 + 3)); // #2
-  test("", () => expect(DiatonicParser.parse("b10"), 12 + 3)); // b3
-  test("", () => expect(DiatonicParser.parse("10"), 12 + 4)); // 3
-  test("", () => expect(DiatonicParser.parse("11"), 12 + 5)); // 4
-  test("", () => expect(DiatonicParser.parse("#11"), 12 + 6)); // #4
+  test("", () => expect(DiatonicParser.parse("8"), 0)); // 1
+  test("", () => expect(DiatonicParser.parse("#8"), 1)); // #1
+  test("", () => expect(DiatonicParser.parse("b9"), 1)); // b2
+  test("", () => expect(DiatonicParser.parse("9"), 2)); // 2
+  test("", () => expect(DiatonicParser.parse("#9"), 3)); // #2
+  test("", () => expect(DiatonicParser.parse("b10"), 3)); // b3
+  test("", () => expect(DiatonicParser.parse("10"), 4)); // 3
+  test("", () => expect(DiatonicParser.parse("11"), 5)); // 4
+  test("", () => expect(DiatonicParser.parse("#11"), 6)); // #4
 }
 
 void _chordsTest() {
@@ -81,7 +81,8 @@ void _chordsTest() {
   test("", () => expect(Chords.getChord(60, [0, 5, 7]).type, ChordType.sus4));
 
   test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
-  test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.majorSeventh));
+  test("", () => expect(Chords.getChord(60, [0, 4, 7, 11]).type, ChordType.majorSeventh));
+  test("", () => expect(Chords.getChord(60, [0, 4, 7, 11, 14]).type, ChordType.majorNinth));
 
   test("duplicates of notes", () => expect(Chords.analyze({60, 60, 64, 67}), equals([Chord("C", ChordType.major)])));
   test("same note in octaves", () => expect(Chords.analyze({60, 64, 67, 72}), equals([Chord("C", ChordType.major)])));

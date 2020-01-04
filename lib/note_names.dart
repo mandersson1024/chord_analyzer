@@ -35,13 +35,13 @@ class DiatonicParser {
     5: 7,
     6: 9,
     7: 11,
-    8: 12 + 0,
-    9: 12 + 2,
-    10: 12 + 4,
-    11: 12 + 5,
-    12: 12 + 7,
-    13: 12 + 9,
-    14: 12 + 11,
+    8: 0,
+    9: 2,
+    10: 4,
+    11: 5,
+    12: 7,
+    13: 9,
+    14: 11,
   };
 
   static const Map<String, int> accidentalMap =  {
@@ -64,8 +64,10 @@ class DiatonicParser {
     if (chord.isEmpty) {
       return [];
     } else {
-      List<String> notes = chord.split(",");
-      return notes.map((String name) => DiatonicParser.parse(name)).toList();
+      List<String> textNotes = chord.split(",");
+      List<int> notes = textNotes.map((String name) => DiatonicParser.parse(name)).toList();
+      notes.sort();
+      return notes;
     }
   }
 

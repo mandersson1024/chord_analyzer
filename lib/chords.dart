@@ -7,7 +7,11 @@ class ChordType {
     //major
     ChordType.major,
     ChordType.majorSeventh,
+    ChordType.majorSeventhNo3,
     ChordType.majorSeventhNo5,
+    ChordType.majorNinth,
+    ChordType.majorNinthNo3,
+    ChordType.majorNinthNo5,
 
     ChordType.sus2,
     ChordType.m,
@@ -25,8 +29,12 @@ class ChordType {
 
   // major
   static final ChordType major = ChordType("1,3,5", "");
-  static final ChordType majorSeventh = ChordType("1,3,5,7", "Maj7");
-  static final ChordType majorSeventhNo5 = ChordType("1,3,7", "Maj7<sup>(no5)</sup>");
+  static final ChordType majorSeventh = ChordType("1,3,5,7", "maj7");
+  static final ChordType majorSeventhNo3 = ChordType("1,5,7", "maj7<sup>(no3)</sup>");
+  static final ChordType majorSeventhNo5 = ChordType("1,3,7", "maj7<sup>(no5)</sup>");
+  static final ChordType majorNinth = ChordType("1,3,5,7,9", "maj9");
+  static final ChordType majorNinthNo3 = ChordType("1,5,7,9", "maj9<sup>(no3)</sup>");
+  static final ChordType majorNinthNo5 = ChordType("1,3,7,9", "maj9<sup>(no5)</sup>");
 
   // triads
   static final ChordType m = ChordType("1,b3,5", "m");
@@ -94,7 +102,9 @@ class Chords {
 
   static Chord getChord(int root, List<int> notes) {
     String noteName = NoteNames.name(root);
-    ChordType type = match(notes);
+    var normalizedNotes = notes.map((int note) => note % 12).toList();
+    normalizedNotes.sort();
+    ChordType type = match(normalizedNotes);
     return Chord(noteName, type);
   }
 
