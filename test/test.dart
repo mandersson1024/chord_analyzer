@@ -71,10 +71,15 @@ void _chordsTest() {
   test("", () => expect(Chords.getChord(60, []).type, ChordType.undefined));
   test("", () => expect(Chords.getChord(60, [0]).type, ChordType.undefined));
   test("", () => expect(Chords.getChord(60, [0, 4]).type, ChordType.undefined));
+
+  // triads
   test("", () => expect(Chords.getChord(60, [0, 4, 7]).type, ChordType.major));
   test("", () => expect(Chords.getChord(60, [0, 3, 7]).type, ChordType.m));
+  test("", () => expect(Chords.getChord(60, [0, 3, 6]).type, ChordType.dim));
+  test("", () => expect(Chords.getChord(60, [0, 4, 8]).type, ChordType.aug));
   test("", () => expect(Chords.getChord(60, [0, 2, 7]).type, ChordType.sus2));
   test("", () => expect(Chords.getChord(60, [0, 5, 7]).type, ChordType.sus4));
+
   test("", () => expect(Chords.getChord(60, [0, 3, 7, 10]).type, ChordType.m7));
   test("", () => expect(Chords.getChord(60, [0, 4, 7, 10]).type, ChordType.seventh));
 

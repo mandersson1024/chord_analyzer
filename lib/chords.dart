@@ -4,10 +4,14 @@ import "package:music_theory/note_names.dart";
 
 class ChordType {
   static final List<ChordType> allValidChords = [
+    //triads
     ChordType.sus2,
     ChordType.m,
     ChordType.major,
     ChordType.sus4,
+    ChordType.aug,
+    ChordType.dim,
+
     ChordType.m6,
     ChordType.sixth,
     ChordType.m7,
@@ -15,8 +19,14 @@ class ChordType {
   ];
 
   static final ChordType undefined = ChordType("", "", "undefined");
+
+  // triads
   static final ChordType major = ChordType("1,3,5", "", "");
   static final ChordType m = ChordType("1,b3,5", "m", "-");
+  static final ChordType dim = ChordType("1,b3,b5", "dim", "o");
+  static final ChordType aug = ChordType("1,3,#5", "aug", "+");
+
+  // sevenths
   static final ChordType sus2 = ChordType.sameName("1,2,5", "sus2");
   static final ChordType sus4 = ChordType.sameName("1,4,5", "sus4");
   static final ChordType sixth = ChordType.sameName("1,3,5,6", "<sup>6</sup>");
