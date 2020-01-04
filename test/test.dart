@@ -55,15 +55,16 @@ void _diatonicStepToChromaticTest() {
   test("", () => expect(DiatonicParser.parse("#6"), 10));
   test("", () => expect(DiatonicParser.parse("b7"), 10));
   test("", () => expect(DiatonicParser.parse("7"), 11));
-  test("", () => expect(DiatonicParser.parse("8"), 12));
-  test("", () => expect(DiatonicParser.parse("#9"), 1));
-  test("", () => expect(DiatonicParser.parse("b9"), 1));
-  test("", () => expect(DiatonicParser.parse("10"), 2));
-  test("", () => expect(DiatonicParser.parse("#11"), 3));
-  test("", () => expect(DiatonicParser.parse("b11"), 3));
-  test("", () => expect(DiatonicParser.parse("12"), 4));
-  test("", () => expect(DiatonicParser.parse("13"), 5));
-  test("", () => expect(DiatonicParser.parse("#4"), 6));
+
+  test("", () => expect(DiatonicParser.parse("8"), 12 + 0)); // 1
+  test("", () => expect(DiatonicParser.parse("#8"), 12 + 1)); // #1
+  test("", () => expect(DiatonicParser.parse("b9"), 12 + 1)); // b2
+  test("", () => expect(DiatonicParser.parse("9"), 12 + 2)); // 2
+  test("", () => expect(DiatonicParser.parse("#9"), 12 + 3)); // #2
+  test("", () => expect(DiatonicParser.parse("b10"), 12 + 3)); // b3
+  test("", () => expect(DiatonicParser.parse("10"), 12 + 4)); // 3
+  test("", () => expect(DiatonicParser.parse("11"), 12 + 5)); // 4
+  test("", () => expect(DiatonicParser.parse("#11"), 12 + 6)); // #4
 }
 
 void _chordsTest() {
