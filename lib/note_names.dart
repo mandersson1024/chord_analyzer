@@ -23,3 +23,12 @@ class NoteNames {
   }
 
 }
+
+
+class DiatonicParser {
+
+  static int parse(String name) {
+    return 0;
+  }
+
+}

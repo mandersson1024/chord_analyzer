@@ -5,6 +5,7 @@ import "package:music_theory/chords.dart";
 
 void main() {
   group("note_names", _noteNamesTest);
+  group("diatonic_to_chromatic", _diatonicStepToChromaticTest);
   group("chords", _chordsTest);
 }
 
@@ -34,6 +35,35 @@ void _noteNamesTest() {
   test("", () => expect(NoteNames.name(70), equals("B♭")));
   test("", () => expect(NoteNames.name(71), equals("B")));
   test("", () => expect(NoteNames.name(72), equals("C")));
+}
+
+void _diatonicStepToChromaticTest() {
+  test("", () => expect(DiatonicParser.parse("1"), 0));
+  test("", () => expect(DiatonicParser.parse("#1"), 1));
+  test("", () => expect(DiatonicParser.parse("b2"), 1));
+  test("", () => expect(DiatonicParser.parse("2"), 2));
+  test("", () => expect(DiatonicParser.parse("#2"), 3));
+  test("", () => expect(DiatonicParser.parse("b3"), 3));
+  test("", () => expect(DiatonicParser.parse("3"), 4));
+  test("", () => expect(DiatonicParser.parse("4"), 5));
+  test("", () => expect(DiatonicParser.parse("#4"), 6));
+  test("", () => expect(DiatonicParser.parse("b5"), 6));
+  test("", () => expect(DiatonicParser.parse("5"), 7));
+  test("", () => expect(DiatonicParser.parse("#5"), 8));
+  test("", () => expect(DiatonicParser.parse("b6"), 8));
+  test("", () => expect(DiatonicParser.parse("6"), 9));
+  test("", () => expect(DiatonicParser.parse("#6"), 10));
+  test("", () => expect(DiatonicParser.parse("b7"), 10));
+  test("", () => expect(DiatonicParser.parse("7"), 11));
+  test("", () => expect(DiatonicParser.parse("8"), 12));
+  test("", () => expect(DiatonicParser.parse("#9"), 1));
+  test("", () => expect(DiatonicParser.parse("b9"), 1));
+  test("", () => expect(DiatonicParser.parse("10"), 2));
+  test("", () => expect(DiatonicParser.parse("#11"), 3));
+  test("", () => expect(DiatonicParser.parse("b11"), 3));
+  test("", () => expect(DiatonicParser.parse("12"), 4));
+  test("", () => expect(DiatonicParser.parse("13"), 5));
+  test("", () => expect(DiatonicParser.parse("#4"), 6));
 }
 
 void _chordsTest() {
