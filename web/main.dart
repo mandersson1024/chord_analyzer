@@ -1,5 +1,4 @@
 import 'dart:html';
-import 'package:music_theory/audio.dart';
 import 'package:music_theory/keyboard/keyboard_model.dart';
 import 'package:music_theory/keyboard/keyboard_presenter.dart';
 import 'package:music_theory/midi.dart';
@@ -7,14 +6,12 @@ import 'package:music_theory/webmidi_js.dart';
 import 'package:music_theory/chords.dart';
 import 'package:music_theory/keyboard/keyboard_view.dart';
 
-Audio _audio = Audio();
 KeyboardModel _model = KeyboardModel();
 KeyboardPresenter _presenter = KeyboardPresenter(_model);
 KeyboardView _view;
 
 
 void main() {
-  _presenter.onPlayAudio.listen((event) => _audio.playNote(event.note));
   _presenter.onKeySelectionChanged.listen((event) => _onKeySelectionChanged(event.note, event.selected));
 
   Midi.enableMidi(_onMidiStatus, _onMidiInput);
@@ -45,7 +42,7 @@ void _onMidiInput(int note, bool on) {
 }
 
 void _refreshChordDisplay() {
-  querySelector('#midi-notes').text = _model.notes.toString();
+  querySelector('#midi-notes').text = _model.notes.toList().toString();
   List<Chord> chords = Chords.analyze(_model.notes);
   (querySelector('#chord') as HtmlElement).innerHtml = chords.isEmpty ? "" : _chordNameToHtml(chords.first.toString());
   (querySelector('#alternative-chords') as HtmlElement).innerHtml = _formatChordList(_alternativeChords(chords));

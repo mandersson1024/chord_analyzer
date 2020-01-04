@@ -6,11 +6,9 @@ class KeyboardPresenter {
 
   KeyboardModel _model;
   EventForwarder<KeyboardNoteSelectionChanged> onKeySelectionChanged;
-  EventForwarder<KeyboardPlayNote> onPlayAudio;
 
   KeyboardPresenter(this._model) {
     onKeySelectionChanged = EventForwarder(_model.events);
-    onPlayAudio = EventForwarder(_model.events);
   }
 
   void pressKey(int note) {
