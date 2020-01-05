@@ -27,7 +27,7 @@ class Midi {
           input.addListener('noteon', "all", allowInterop(onNoteOn));
           input.addListener('noteoff', "all", allowInterop(onNoteOff));
 
-          // todo: For some reason, the lines below is what works for localhost, but not remote
+          // todo: For some reason, use the lines below for webdev
           // input.addListener('noteon', "all", onNoteOn);
           // input.addListener('noteoff', "all", onNoteOff);
         }
