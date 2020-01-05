@@ -1,8 +1,8 @@
 name: music_theory
-description: An absolute bare-bones web app.
+description: A chord analyzer
 # version: 1.0.0
-#homepage: https://www.example.com
-#author: Mikael Andersson <mixand@gmail.com>
+#homepage: https://www.kalaskod.se/music_theory
+#author: Mikael Andersson
 
 environment:
   sdk: '>=2.5.0 <3.0.0'

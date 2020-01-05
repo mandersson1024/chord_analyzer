@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'package:js/js.dart';
 import 'package:music_theory/keyboard/keyboard_model.dart';
 import 'package:music_theory/keyboard/keyboard_presenter.dart';
 import 'package:music_theory/midi.dart';
@@ -9,7 +10,6 @@ import 'package:music_theory/keyboard/keyboard_view.dart';
 KeyboardModel _model = KeyboardModel();
 KeyboardPresenter _presenter = KeyboardPresenter(_model);
 KeyboardView _view;
-
 
 void main() {
   _presenter.onKeySelectionChanged.listen((event) => _onKeySelectionChanged(event.note, event.selected));
@@ -29,12 +29,8 @@ void _onKeySelectionChanged(int note, bool selected) {
 }
 
 void _onMidiStatus(bool enabled) {
-  querySelector('#midi-enabled').text = '${WebMidi.enabled}';
-  querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-
-  if (!enabled) {
-    print("No MIDI");
-  }
+  querySelector('#midi-enabled').text = '${WebMidi_enabled}';
+  querySelector('#midi-inputs').text = '${WebMidi_inputs.map(allowInterop((Input input) => input.name))}';
 }
 
 void _onMidiInput(int note, bool on) {
