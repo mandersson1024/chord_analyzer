@@ -11,7 +11,6 @@ class ChordType {
   static final List<ChordType> allValidChords = [
     //major
     ChordType.major,
-    ChordType.major.no("3"),
     ChordType.majorSeventh,
     ChordType.majorSeventh.no("3"),
     ChordType.majorSeventh.no("5"),
@@ -120,6 +119,7 @@ class ChordType {
     //other
     ChordType.aug,
     ChordType.aug7,
+    ChordType.power,
   ];
 
   static final ChordType undefined = ChordType("", "undefined");
@@ -169,6 +169,7 @@ class ChordType {
   // other
   static final ChordType aug = ChordType("1,3,#5", "+");
   static final ChordType aug7 = ChordType("1,3,#5,7", "7#5");
+  static final ChordType power = ChordType("1,5", "5");
 
   String definitionString;
   List<int> definition;
