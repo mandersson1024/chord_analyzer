@@ -29,11 +29,11 @@ void _onKeySelectionChanged(int note, bool selected) {
 }
 
 void _onMidiStatus(bool enabled) {
-  if (enabled) {
-    querySelector('#midi-enabled').text = '${WebMidi.enabled}';
-    querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
-  } else {
-    window.console.warn("No MIDI");
+  querySelector('#midi-enabled').text = '${WebMidi.enabled}';
+  querySelector('#midi-inputs').text = '${WebMidi.inputs.map((Input input) => input.name)}';
+
+  if (!enabled) {
+    print("No MIDI");
   }
 }
 
