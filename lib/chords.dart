@@ -38,14 +38,12 @@ class ChordType {
     ChordType.majorLydian.add("13"),
     ChordType.majorSeventhFlat6,
     ChordType.majorSeventhFlat6.no("5"),
-    ChordType.majorSeventhFlat6.no("5"),
     ChordType.majorSeventhFlat6.no("5,7"),
     //ChordType.majorSeventhFlat6.no("5,7,9"), // duplicated by simpler chord
     ChordType.majorSeventhFlat6.no("7"),
     ChordType.majorSeventhFlat6.no("7,9"),
     ChordType.majorSeventhFlat6.no("9"),
     ChordType.majorSeventhFlat6.add("11"),
-    ChordType.majorSeventhFlat6.no("5").add("11"),
     ChordType.majorSeventhFlat6.no("5").add("11"),
     ChordType.majorSeventhFlat6.no("5,7").add("11"),
     ChordType.majorSeventhFlat6.no("5,7,9").add("11"),
@@ -88,8 +86,8 @@ class ChordType {
     ChordType.sus47.no("5"),
     ChordType.eleventh,
     ChordType.eleventh.no("5"),
-    ChordType.eleventh.no("9"),
-    ChordType.eleventh.no("5,9"),
+    //ChordType.eleventh.no("9"), // duplicated by simpler chord
+    //ChordType.eleventh.no("5,9"), // duplicated by simpler chord
     ChordType.sus4Flat9,
     ChordType.sus4Flat9.no("5"),
 
@@ -136,13 +134,13 @@ class ChordType {
 
   // major
   static final ChordType major = ChordType("1,3,5", "");
-  static final ChordType majorSeventh = ChordType("1,3,5,7", "<small>maj</small>7");
-  static final ChordType majorNinth = ChordType("1,3,5,7,9", "<small>maj</small>9");
-  static final ChordType major13th = ChordType("1,3,5,7,9,11,13", "<small>maj</small>13");
+  static final ChordType majorSeventh = ChordType("1,3,5,7", "maj7", html: "<small>maj</small>7");
+  static final ChordType majorNinth = ChordType("1,3,5,7,9", "maj9", html: "<small>maj</small>9");
+  static final ChordType major13th = ChordType("1,3,5,7,9,11,13", "maj13", html: "<small>maj</small>13");
   static final ChordType majorSixth = ChordType("1,3,5,6", "6");
   static final ChordType majorSixthNinth = ChordType("1,3,5,6,9", "6/9");
-  static final ChordType majorLydian = ChordType("1,3,5,7,#11", "<small>maj</small>♯11");
-  static final ChordType majorSeventhFlat6 = ChordType("1,3,5,7,9,b13", "<small>maj</small>7b6");
+  static final ChordType majorLydian = ChordType("1,3,5,7,#11", "maj#11", html: "<small>maj</small>#11");
+  static final ChordType majorSeventhFlat6 = ChordType("1,3,5,7,9,b13", "maj7b6", html: "<small>maj</small>7b6");
 
   // dominant/seventh (normal)
   static final ChordType dominantSeventh = ChordType("1,3,5,b7", "7");
@@ -153,28 +151,28 @@ class ChordType {
   // dominant/seventh (altered)
   static final ChordType dominantFlat9 = ChordType("1,3,5,b7,b9", "7b9");
   static final ChordType dominantSharp9 = ChordType("1,3,5,b7,#9", "7#9");
-  static final ChordType altered = ChordType("1,3,b7", "<small>alt</small>7");
+  static final ChordType altered = ChordType("1,3,b7", "alt7", html: "<small>alt</small>7");
 
   // dominant/seventh (suspended)
-  static final ChordType sus4 = ChordType("1,4,5", "<small>sus</small>4");
-  static final ChordType sus2 = ChordType("1,2,5", "<small>sus</small>2");
-  static final ChordType sus47 = ChordType("1,4,5,b7", "7<small>sus</small>4");
+  static final ChordType sus4 = ChordType("1,4,5", "sus4", html: "<small>sus</small>4");
+  static final ChordType sus2 = ChordType("1,2,5", "sus2", html: "<small>sus</small>2");
+  static final ChordType sus47 = ChordType("1,4,5,b7", "7sus4", html: "7<small>sus</small>4");
   static final ChordType eleventh = ChordType("1,5,b7,9,11", "11");
-  static final ChordType sus4Flat9 = ChordType("1,4,5,b9", "b9<small>sus</small>");
+  static final ChordType sus4Flat9 = ChordType("1,4,5,b9", "b9sus", html: "b9<small>sus</small>");
 
   // minor
-  static final ChordType minor = ChordType("1,b3,5", "<small>m</small>");
-  static final ChordType minor7 = ChordType("1,b3,5,b7", "<small>m</small>7");
-  static final ChordType minorMajor7 = ChordType("1,b3,5,7", "<small>m/maj</small>7");
-  static final ChordType minor6 = ChordType("1,b3,5,6", "<small>m</small>6");
-  static final ChordType minor9 = ChordType("1,b3,5,b7,9", "<small>m</small>9");
-  static final ChordType minor11 = ChordType("1,b3,5,b7,9,11", "<small>m</small>11");
-  static final ChordType minor13 = ChordType("1,b3,5,b7,9,13", "<small>m</small>13");
+  static final ChordType minor = ChordType("1,b3,5", "m", html: "<small>m</small>");
+  static final ChordType minor7 = ChordType("1,b3,5,b7", "m7", html: "<small>m</small>7");
+  static final ChordType minorMajor7 = ChordType("1,b3,5,7", "m/maj7", html: "<small>m/maj</small>7");
+  static final ChordType minor6 = ChordType("1,b3,5,6", "m6", html: "<small>m</small>6");
+  static final ChordType minor9 = ChordType("1,b3,5,b7,9", "m9", html: "<small>m</small>9");
+  static final ChordType minor11 = ChordType("1,b3,5,b7,9,11", "m11", html: "<small>m</small>11");
+  static final ChordType minor13 = ChordType("1,b3,5,b7,9,13", "m13", html: "<small>m</small>13");
 
   // diminished
-  static final ChordType dim = ChordType("1,b3,b5", "<sup>o</sup>");
-  static final ChordType dim7 = ChordType("1,b3,b5,6", "<sup>o</sup>7");
-  static final ChordType halfDim = ChordType("1,b3,b5,b7", "<sup>ø</sup>");
+  static final ChordType dim = ChordType("1,b3,b5", "o", html: "<sup>o</sup>");
+  static final ChordType dim7 = ChordType("1,b3,b5,6", "o7", html: "<sup>o</sup>7");
+  static final ChordType halfDim = ChordType("1,b3,b5,b7", "ø", html: "<sup>ø</sup>");
 
   // other
   static final ChordType aug = ChordType("1,3,#5", "+");
@@ -182,17 +180,23 @@ class ChordType {
 
   String definitionString;
   List<int> definition;
-  String notation;
+  String ascii;
+  String html;
 
-  ChordType(this.definitionString, this.notation) {
+  ChordType(this.definitionString, this.ascii, {this.html}) {
     definition = DiatonicParser.parseChord(definitionString);
+    if (html == null) {
+      html = ascii;
+    }
+
+    html.replaceAll("#", "♯").replaceAll("b", "♭");
   }
 
   ChordType no(String notes) {
     List<String> diatonicNotes = definitionString.split(",");
     List<String> alteredNotes = notes.split(",");
     diatonicNotes.removeWhere((String note) => alteredNotes.contains(note));
-    ChordType variation = ChordType(diatonicNotes.join(","), "$notation<sup>(<small>no</small>${notes})</sup>");
+    ChordType variation = ChordType(diatonicNotes.join(","), "${ascii}(no${notes})", html: "$html<sup>(<small>no</small>${notes})</sup>");
     return variation;
   }
 
@@ -200,12 +204,12 @@ class ChordType {
     List<String> diatonicNotes = definitionString.split(",");
     List<String> alteredNotes = notes.split(",");
     diatonicNotes.addAll(alteredNotes);
-    ChordType variation = ChordType(diatonicNotes.join(","), "$notation<sup>(<small>add</small>${notes})</sup>");
+    ChordType variation = ChordType(diatonicNotes.join(","), "${ascii}(add${notes})", html: "$html<sup>(<small>add</small>${notes})</sup>");
     return variation;
   }
 
   String toString() {
-    return notation.replaceAll("#", "♯").replaceAll("b", "♭");
+    return ascii;
   }
 }
 
@@ -219,7 +223,7 @@ class Chord {
     if (type == ChordType.undefined) {
       return "n.c.";
     } else {
-      return "${root}${type}";
+      return "${root}${type.html}";
     }
   }
 

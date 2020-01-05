@@ -96,7 +96,7 @@ void _duplicatedChordsTest() {
     for (ChordType chordType2 in ChordType.allValidChords) {
       if (chordType1 != chordType2) {
         if(ListEquality().equals(chordType1.definition, chordType2.definition)) {
-          print("$chordType1 == $chordType2");
+          test("the two chords types contain the same notes", () => fail("$chordType1 == $chordType2"));
         }
       }
     }
