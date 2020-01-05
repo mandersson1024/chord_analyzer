@@ -18,37 +18,29 @@ class ChordType {
     ChordType.majorNinth,
     ChordType.majorNinth.no("5"),
     ChordType.major13th,
-    ChordType.major13th.no("5"),
-    ChordType.major13th.no("5,9"),
+    //ChordType.major13th.no("5"), // duplicated by simpler chord
+    //ChordType.major13th.no("5,9"),  // duplicated by simpler chord
     ChordType.major13th.no("5,11"),
     ChordType.major13th.no("5,9,11"),
     ChordType.major13th.no("9"),
     ChordType.major13th.no("9,11"),
     ChordType.major13th.no("11"),
     ChordType.majorSixth,
-    ChordType.majorSixth.no("5"),
+    //ChordType.majorSixth.no("5"), // duplicated by simpler chord
     ChordType.majorSixthNinth,
     ChordType.majorSixthNinth.no("5"),
     ChordType.majorLydian,
-    ChordType.majorLydian.no("5"),
+    //ChordType.majorLydian.no("5"),  // duplicated by simpler chord
     ChordType.majorLydian.no("5,7"),
     ChordType.majorLydian.no("7"),
     ChordType.majorLydian.add("9"),
     ChordType.majorLydian.add("9,13"),
-    ChordType.majorLydian.add("13"),
+    //ChordType.majorLydian.add("13"), // duplicated by simpler chord
     ChordType.majorSeventhFlat6,
     ChordType.majorSeventhFlat6.no("5"),
-    ChordType.majorSeventhFlat6.no("5,7"),
-    //ChordType.majorSeventhFlat6.no("5,7,9"), // duplicated by simpler chord
-    ChordType.majorSeventhFlat6.no("7"),
-    ChordType.majorSeventhFlat6.no("7,9"),
     ChordType.majorSeventhFlat6.no("9"),
     ChordType.majorSeventhFlat6.add("11"),
     ChordType.majorSeventhFlat6.no("5").add("11"),
-    ChordType.majorSeventhFlat6.no("5,7").add("11"),
-    ChordType.majorSeventhFlat6.no("5,7,9").add("11"),
-    ChordType.majorSeventhFlat6.no("7").add("11"),
-    ChordType.majorSeventhFlat6.no("7,9").add("11"),
     ChordType.majorSeventhFlat6.no("9").add("11"),
 
     // dominant/seventh (normal)
@@ -79,11 +71,11 @@ class ChordType {
 
     // dominant/seventh (suspended)
     ChordType.sus4,
-    ChordType.sus4.no("5"),
+    //ChordType.sus4.no("5"), // duplicated by simpler chord
     ChordType.sus2,
     ChordType.sus2.no("5"),
     ChordType.sus47,
-    ChordType.sus47.no("5"),
+    //ChordType.sus47.no("5"), // duplicated by simpler chord
     ChordType.eleventh,
     ChordType.eleventh.no("5"),
     //ChordType.eleventh.no("9"), // duplicated by simpler chord
@@ -108,13 +100,13 @@ class ChordType {
     ChordType.minorMajor7.no("5").add("13"),
     ChordType.minorMajor7.no("5").add("b13"),
     ChordType.minor6,
-    ChordType.minor6.no("5"),
+    //ChordType.minor6.no("5"), // duplicated by simpler chord
     ChordType.minor9,
     ChordType.minor9.no("5"),
     ChordType.minor11,
     ChordType.minor11.no("5"),
-    ChordType.minor11.no("5,9"),
-    ChordType.minor11.no("9"),
+    //ChordType.minor11.no("5,9"), // duplicated by simpler chord
+    //ChordType.minor11.no("9"), // duplicated by simpler chord
     ChordType.minor13,
     ChordType.minor13.no("5"),
     ChordType.minor13.no("5,9"),
@@ -189,7 +181,7 @@ class ChordType {
       html = ascii;
     }
 
-    html.replaceAll("#", "♯").replaceAll("b", "♭");
+    html = html.replaceAll("#", "♯").replaceAll("b", "♭");
   }
 
   ChordType no(String notes) {
